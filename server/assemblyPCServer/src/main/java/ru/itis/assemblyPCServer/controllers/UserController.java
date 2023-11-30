@@ -1,12 +1,16 @@
 package ru.itis.assemblyPCServer.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.itis.assemblyPCServer.dto.UserDto;
 import ru.itis.assemblyPCServer.models.Form;
 import ru.itis.assemblyPCServer.services.UserService;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
@@ -29,6 +33,20 @@ public class UserController {
     public ResponseEntity<Void> updateUserName(@PathVariable Long id, @RequestBody UserDto user) {
         userService.updateUser(id, user);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/fileSystem")
+    public ResponseEntity<?> uploadImageToFileSystem(@RequestParam("image") MultipartFile file) throws IOException {
+        String uploadImage = userService.uploadAvatarToFileSystem(file);
+        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+    }
+
+    @GetMapping("/fileSystem/{filename}")
+    public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable String filename) throws IOException {
+        byte[] imageData = userService.downloadAvatarFromFileSystem(filename);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.valueOf("image/png"))
+                .body(imageData);
     }
 
 }

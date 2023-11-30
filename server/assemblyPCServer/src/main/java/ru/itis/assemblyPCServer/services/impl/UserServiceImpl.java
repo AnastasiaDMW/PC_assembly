@@ -3,6 +3,7 @@ package ru.itis.assemblyPCServer.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import ru.itis.assemblyPCServer.dto.UserDto;
 import ru.itis.assemblyPCServer.encrypt.Hashing;
@@ -13,7 +14,10 @@ import ru.itis.assemblyPCServer.repositories.UserRepository;
 import ru.itis.assemblyPCServer.repositories.UserRoleRepository;
 import ru.itis.assemblyPCServer.services.UserService;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -23,7 +27,7 @@ import java.util.Random;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final String FOLDER_PATH = "..\\image-test\\src\\main\\resources\\assembly_images\\";
+    private final String FOLDER_PATH = "..\\image-test\\src\\main\\resources\\avatars\\";
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -78,16 +82,6 @@ public class UserServiceImpl implements UserService {
         return "Пользователь зарегистрирован";
     }
 
-//    private Long id;
-//    private String name;
-//    private String lastname;
-//    private String email;
-//    private String password;
-//    private String photo;
-//    private int bonuses;
-//    @Column(name = "phone_number")
-//    private String phoneNumber;
-
     public String generatePartFilename() {
         Random random = new Random();
 
@@ -124,10 +118,45 @@ public class UserServiceImpl implements UserService {
         if (user.getPhoneNumber() != null) {
             newUser.setPhoneNumber(user.getPhoneNumber());
         }
-        if (user.getPhoto() != null) {
-            newUser.setPhoto(user.getPhoto());
-        }
+//        if (user.getPhoto() != null) {
+//            newUser.setPhoto(user.getPhoto());
+//        }
 
         userRepository.save(newUser);
+    }
+
+    @Override
+    public String uploadAvatarToFileSystem(MultipartFile file) throws IOException {
+        boolean isNameExist = Boolean.FALSE;
+        String filePath;
+        String fileName;
+
+        List<User> newUser = userRepository.findAll();
+
+        for (User user : newUser) {
+            if (Objects.equals(user.getPhoto(), file.getOriginalFilename())) {
+                isNameExist = Boolean.TRUE;
+                break;
+            }
+        }
+
+        String randomString = generatePartFilename();
+        if (isNameExist == Boolean.TRUE) {
+            fileName = randomString+file.getOriginalFilename();
+        }
+        else{
+            fileName = file.getOriginalFilename();
+        }
+        filePath = new File(FOLDER_PATH).getAbsolutePath()+"\\"+fileName;
+
+        file.transferTo(new File(filePath));
+
+        return "file uploaded successfully: "+fileName;
+    }
+
+    @Override
+    public byte[] downloadAvatarFromFileSystem(String filename) throws IOException {
+        String filePath = new File(FOLDER_PATH).getAbsolutePath()+"\\"+filename;
+        return Files.readAllBytes(new File(filePath).toPath());
     }
 }
