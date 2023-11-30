@@ -1,10 +1,8 @@
 package ru.itis.assemblyPCServer.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.itis.assemblyPCServer.dto.UserDto;
 import ru.itis.assemblyPCServer.models.Form;
 import ru.itis.assemblyPCServer.services.UserService;
@@ -12,7 +10,7 @@ import ru.itis.assemblyPCServer.services.UserService;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -25,6 +23,12 @@ public class UserController {
     @PostMapping("/register")
     public String registration(@RequestBody UserDto user) throws NoSuchAlgorithmException {
         return userService.registration(user);
+    }
+
+    @PatchMapping("/update-name/{id}")
+    public ResponseEntity<Void> updateUserName(@PathVariable Long id, @RequestBody UserDto user) {
+        userService.updateUser(id, user);
+        return ResponseEntity.noContent().build();
     }
 
 }

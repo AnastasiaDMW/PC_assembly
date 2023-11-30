@@ -18,10 +18,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final String FOLDER_PATH = "..\\image-test\\src\\main\\resources\\assembly_images\\";
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -66,7 +68,7 @@ public class UserServiceImpl implements UserService {
         newUser.setName(user.getName());
         newUser.setLastname(user.getLastname());
         newUser.setEmail(user.getEmail());
-        newUser.setPhoto(user.getPhoto());
+        newUser.setPhoto("CatDefaultAvatar.png");
         newUser.setBonuses(0);
         newUser.setPassword(hash.bytesToHex(encodedHash));
         newUser.setPhoneNumber(user.getPhoneNumber());
@@ -74,5 +76,58 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(newUser);
         return "Пользователь зарегистрирован";
+    }
+
+//    private Long id;
+//    private String name;
+//    private String lastname;
+//    private String email;
+//    private String password;
+//    private String photo;
+//    private int bonuses;
+//    @Column(name = "phone_number")
+//    private String phoneNumber;
+
+    public String generatePartFilename() {
+        Random random = new Random();
+
+        String lettersAndNumbers = "";
+        String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numbers = "0123456789";
+
+        for (int i = 0; i < 10; i++) {
+            int randomIndex1 = random.nextInt(alphabet.length());
+            char randomLetter = alphabet.charAt(randomIndex1);
+            lettersAndNumbers += randomLetter;
+
+            int randomIndex2 = random.nextInt(numbers.length());
+            char randomNumber = numbers.charAt(randomIndex2);
+            lettersAndNumbers += randomNumber;
+        }
+
+        return lettersAndNumbers;
+    }
+
+    @Override
+    public void updateUser(Long id, UserDto user) {
+
+        User newUser = userRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid user id: " + id));
+
+        if (user.getName() != null) {
+            newUser.setName(user.getName());
+        }
+        if (user.getLastname() != null) {
+            newUser.setLastname(user.getLastname());
+        }
+        if (user.getPhoneNumber() != null) {
+            newUser.setPhoneNumber(user.getPhoneNumber());
+        }
+        if (user.getPhoto() != null) {
+            newUser.setPhoto(user.getPhoto());
+        }
+
+        userRepository.save(newUser);
     }
 }
