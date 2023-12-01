@@ -118,9 +118,9 @@ public class UserServiceImpl implements UserService {
         if (user.getPhoneNumber() != null) {
             newUser.setPhoneNumber(user.getPhoneNumber());
         }
-//        if (user.getPhoto() != null) {
-//            newUser.setPhoto(user.getPhoto());
-//        }
+        if (user.getPhoto() != null) {
+            newUser.setPhoto(user.getPhoto());
+        }
 
         userRepository.save(newUser);
     }
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
         System.out.println(filePath);
         file.transferTo(new File(filePath));
 
-        return "file uploaded successfully: "+fileName;
+        return "image uploaded successfully: "+fileName;
     }
 
     @Override
