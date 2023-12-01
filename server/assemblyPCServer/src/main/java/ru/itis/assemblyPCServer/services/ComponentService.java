@@ -8,5 +8,7 @@ public interface ComponentService{
 
     List<ComponentDto> getAllComponents();
 
-    List<ComponentDto> getComponentsById(Long componentTypeId);
+    List<ComponentDto> getComponentByTypeId(Long componentTypeId);
+
+    ComponentDto getComponentById(Long id);
 }
