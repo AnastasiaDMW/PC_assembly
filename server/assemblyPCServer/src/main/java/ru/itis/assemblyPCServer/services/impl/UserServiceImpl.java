@@ -27,7 +27,7 @@ import java.util.Random;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final String FOLDER_PATH = "..\\image-test\\src\\main\\resources\\avatars\\";
+    private final String FOLDER_PATH = "..\\assemblyPCServer\\src\\main\\resources\\avatars\\";
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -147,8 +147,9 @@ public class UserServiceImpl implements UserService {
         else{
             fileName = file.getOriginalFilename();
         }
+        System.out.println(fileName);
         filePath = new File(FOLDER_PATH).getAbsolutePath()+"\\"+fileName;
-
+        System.out.println(filePath);
         file.transferTo(new File(filePath));
 
         return "file uploaded successfully: "+fileName;
