@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ru.itis.assemblyPCServer.dto.ComponentDto;
+import ru.itis.assemblyPCServer.models.Component;
 import ru.itis.assemblyPCServer.models.User;
 import ru.itis.assemblyPCServer.repositories.ComponentRepository;
 import ru.itis.assemblyPCServer.services.ComponentService;
@@ -39,10 +40,14 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
-    public ComponentDto getComponentById(Long id) {
-        ComponentDto component = ComponentDto.from(componentRepository
-                .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid user id: " + id)));
+    public ComponentDto getComponentDtoById(Long id) {
+        return ComponentDto.from(componentRepository.findByid(id));
+    }
+
+    @Override
+    public Component getComponentById(Long id) {
+        Component component = componentRepository.findByid(id);
+        System.out.println("ComponentService: "+component.getTitle());
         return component;
     }
 }

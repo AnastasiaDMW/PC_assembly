@@ -42,8 +42,7 @@ public class UserServiceImpl implements UserService {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] encodedHash = digest.digest(auth.getPassword().getBytes(StandardCharsets.UTF_8));
                 Hashing hash = new Hashing();
-                System.out.println(hash.bytesToHex(encodedHash));
-                System.out.println(user.getPassword());
+
                 if (!Objects.equals(hash.bytesToHex(encodedHash), user.getPassword())) {
                     return "Неправильный пароль!";
                 }
@@ -147,9 +146,9 @@ public class UserServiceImpl implements UserService {
         else{
             fileName = file.getOriginalFilename();
         }
-        System.out.println(fileName);
+
         filePath = new File(FOLDER_PATH).getAbsolutePath()+"\\"+fileName;
-        System.out.println(filePath);
+
         file.transferTo(new File(filePath));
 
         return "image uploaded successfully: "+fileName;

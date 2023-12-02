@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itis.assemblyPCServer.models.Component;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,10 @@ public class ComponentDto {
     }
 
     public static List<ComponentDto> from(List<Component> components) {
+        return components.stream().map(ComponentDto::from).collect(Collectors.toList());
+    }
+
+    public static Collection<ComponentDto> from(Collection<Component> components) {
         return components.stream().map(ComponentDto::from).collect(Collectors.toList());
     }
 

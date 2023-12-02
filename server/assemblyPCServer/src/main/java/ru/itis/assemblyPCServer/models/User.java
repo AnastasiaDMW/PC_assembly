@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -34,7 +35,7 @@ public class User {
     private List<Cart> carts;
 
     @ManyToMany(mappedBy = "users")
-    private List<Assembly> assemblies;
+    private Set<Assembly> assemblies;
 
     @ManyToOne
     @JoinColumn(name = "user_role_id")

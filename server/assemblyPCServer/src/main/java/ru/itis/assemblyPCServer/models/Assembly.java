@@ -1,13 +1,13 @@
 package ru.itis.assemblyPCServer.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @AllArgsConstructor
@@ -25,13 +25,14 @@ public class Assembly {
     @Column(name = "assembly_code")
     private String assemblyCode;
     @Column(name = "date_created")
-    private Date dateCreated;
+    private String dateCreated;
     @Column(columnDefinition="VARCHAR(1500)")
     private String images;
     private String availability;
 
     @ManyToOne
     @JoinColumn(name = "assembly_type_id")
+    @JsonIgnore
     private AssemblyType assemblyType;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -40,16 +41,13 @@ public class Assembly {
             joinColumns = {@JoinColumn(name = "assembly_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
-    private List<User> users;
+    @JsonIgnore
+    private Set<User> users;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(
-            name = "assembly_component",
-            joinColumns = {@JoinColumn(name = "assembly_id")},
-            inverseJoinColumns = {@JoinColumn(name = "component_id")}
-    )
-    private List<Component> components;
+    @ManyToMany(mappedBy = "assemblies")
+    private Collection<Component> components = new ArrayList<>();
 
     @OneToMany(mappedBy = "assemblies")
+    @JsonIgnore
     private List<Cart> carts;
 }

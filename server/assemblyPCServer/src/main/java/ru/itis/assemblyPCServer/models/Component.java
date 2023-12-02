@@ -1,13 +1,17 @@
 package ru.itis.assemblyPCServer.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -37,8 +41,16 @@ public class Component {
 
     @ManyToOne
     @JoinColumn(name = "component_type_id")
+    @JsonIgnore
     private ComponentType componentType;
 
-    @ManyToMany(mappedBy = "components")
-    private List<Assembly> assemblies;
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.ALL})
+    @JoinTable(
+            name = "assembly_component",
+            joinColumns = {@JoinColumn(name = "component_id")},
+            inverseJoinColumns = {@JoinColumn(name = "assembly_id")}
+    )
+    @JsonIgnore
+    private Collection<Assembly> assemblies = new ArrayList<>();
+
 }

@@ -23,6 +23,6 @@ public class ComponentType {
     @OneToMany(mappedBy = "componentType")
     private List<Component> component;
 
-    @OneToMany
+    @OneToMany(mappedBy = "componentType")
     private List<ComponentsTypeSection> componentsTypeSections;
 }

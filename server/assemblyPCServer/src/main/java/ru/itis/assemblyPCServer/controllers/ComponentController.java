@@ -29,6 +29,6 @@ public class ComponentController {
 
     @GetMapping("/get_component_by_id")
     public ComponentDto getComponentById(@RequestParam Long id) {
-        return componentService.getComponentById(id);
+        return componentService.getComponentDtoById(id);
     }
 }
