@@ -46,8 +46,6 @@ public class ComponentServiceImpl implements ComponentService {
 
     @Override
     public Component getComponentById(Long id) {
-        Component component = componentRepository.findByid(id);
-        System.out.println("ComponentService: "+component.getTitle());
-        return component;
+        return componentRepository.findByid(id);
     }
 }

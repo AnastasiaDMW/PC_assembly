@@ -46,7 +46,6 @@ public class AssemblyServiceImpl implements AssemblyService {
         newAssembly.getComponents().addAll(
                 assembly.getComponents().stream().map(v -> {
                     Component vv = componentService.getComponentById(v.getId());
-                    System.out.println("SaveAssembly: "+vv.getTitle());
                     vv.getAssemblies().add(newAssembly);
                     return vv;
                 }).toList()
@@ -114,6 +113,11 @@ public class AssemblyServiceImpl implements AssemblyService {
     public byte[] downloadAvatarFromFileSystem(String filename) throws IOException {
         String filePath = new File(FOLDER_PATH).getAbsolutePath()+"\\"+filename;
         return Files.readAllBytes(new File(filePath).toPath());
+    }
+
+    @Override
+    public Assembly getAssemblyById(Long id) {
+        return assemblyRepository.findByid(id);
     }
 
 }

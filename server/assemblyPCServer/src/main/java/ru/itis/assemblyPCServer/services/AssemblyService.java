@@ -3,6 +3,7 @@ package ru.itis.assemblyPCServer.services;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.assemblyPCServer.dto.AssemblyDto;
 import ru.itis.assemblyPCServer.models.Assembly;
+import ru.itis.assemblyPCServer.models.Component;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,4 +17,6 @@ public interface AssemblyService {
     String uploadAvatarToFileSystem(MultipartFile file) throws IOException;
 
     byte[] downloadAvatarFromFileSystem(String filename) throws IOException;
+
+    Assembly getAssemblyById(Long id);
 }

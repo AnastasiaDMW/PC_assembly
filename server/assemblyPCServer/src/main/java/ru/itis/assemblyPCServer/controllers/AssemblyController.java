@@ -28,6 +28,11 @@ public class AssemblyController {
         return new ResponseEntity<>(assemblyService.getAllAssembly(), HttpStatus.OK);
     }
 
+    @GetMapping("/get_assembly_by_id")
+    public ResponseEntity<?> getAssemblyById(@RequestParam Long id) {
+        return new ResponseEntity<>(assemblyService.getAssemblyById(id), HttpStatus.OK);
+    }
+
     @PostMapping("/fileSystem")
     public ResponseEntity<?> uploadImageToFileSystem(@RequestParam("image") MultipartFile file) throws IOException {
         String uploadImage = assemblyService.uploadAvatarToFileSystem(file);
