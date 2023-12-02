@@ -2,7 +2,6 @@ package ru.itis.assemblyPCServer.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.itis.assemblyPCServer.dto.ComponentDto;
 import ru.itis.assemblyPCServer.models.Assembly;
 import ru.itis.assemblyPCServer.models.Component;
 import ru.itis.assemblyPCServer.repositories.AssemblyRepository;
@@ -11,7 +10,7 @@ import ru.itis.assemblyPCServer.services.ComponentService;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 @Service
 public class AssemblyServiceImpl implements AssemblyService {
@@ -46,6 +45,11 @@ public class AssemblyServiceImpl implements AssemblyService {
         );
 
         return assemblyRepository.save(newAssembly);
+    }
+
+    @Override
+    public List<Assembly> getAllAssembly() {
+        return assemblyRepository.findAll();
     }
 
 }

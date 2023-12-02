@@ -3,10 +3,7 @@ package ru.itis.assemblyPCServer.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.itis.assemblyPCServer.models.Assembly;
 import ru.itis.assemblyPCServer.services.AssemblyService;
 
@@ -20,6 +17,11 @@ public class AssemblyController {
     @PostMapping("/add")
     public ResponseEntity<?> saveCustomer(@RequestBody Assembly assembly) {
         return new ResponseEntity<>(assemblyService.saveAssembly(assembly), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all_assembly")
+    public ResponseEntity<?> getCustomers() {
+        return new ResponseEntity<>(assemblyService.getAllAssembly(), HttpStatus.OK);
     }
 
 }
