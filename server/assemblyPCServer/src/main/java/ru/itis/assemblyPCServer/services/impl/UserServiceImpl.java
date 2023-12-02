@@ -35,23 +35,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(Form auth) throws NoSuchAlgorithmException {
+        boolean userIsExist = false;
+        String userPwd = "";
         System.out.println(auth);
         List<UserDto> allUsers = UserDto.from(userRepository.findAll());
+
         for (UserDto user : allUsers) {
             if (Objects.equals(user.getEmail(), auth.getEmail())){
-                MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                byte[] encodedHash = digest.digest(auth.getPassword().getBytes(StandardCharsets.UTF_8));
-                Hashing hash = new Hashing();
-
-                if (!Objects.equals(hash.bytesToHex(encodedHash), user.getPassword())) {
-                    return "Неправильный пароль!";
-                }
+                userIsExist = true;
+                userPwd = user.getPassword();
+                break;
             }
         }
-        return "Вход выполнен успешно!";
-    }
+        if (userIsExist){
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] encodedHash = digest.digest(auth.getPassword().getBytes(StandardCharsets.UTF_8));
+            Hashing hash = new Hashing();
 
-    // Сделать подгрузку изображения в register
+            if (!Objects.equals(hash.bytesToHex(encodedHash), userPwd)) {
+                return "Неправильный пароль!";
+            }
+            else{
+                return "Вход выполнен успешно!";
+            }
+        }
+        else{
+            return "Такой пользователь не найден";
+        }
+    }
 
     @Override
     public String registration(UserDto user) throws NoSuchAlgorithmException {
