@@ -29,10 +29,9 @@ public class UserController {
         return userService.registration(user);
     }
 
-    @PatchMapping("/update-name/{id}")
-    public ResponseEntity<Void> updateUserName(@PathVariable Long id, @RequestBody UserDto user) {
-        userService.updateUser(id, user);
-        return ResponseEntity.noContent().build();
+    @PatchMapping("/update/{id}")
+    public String updateUserName(@PathVariable Long id, @RequestBody UserDto user) {
+        return userService.updateUser(id, user);
     }
 
     @PostMapping("/fileSystem")

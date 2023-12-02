@@ -12,7 +12,7 @@ public interface UserService {
     String login(Form auth) throws NoSuchAlgorithmException;
     String registration(UserDto user) throws NoSuchAlgorithmException;
 
-    void updateUser(Long id, UserDto user);
+    String updateUser(Long id, UserDto user);
 
     String uploadAvatarToFileSystem(MultipartFile file) throws IOException;
 

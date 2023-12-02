@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Long id, UserDto user) {
+    public String updateUser(Long id, UserDto user) {
 
         User newUser = userRepository
                 .findById(id)
@@ -122,6 +122,7 @@ public class UserServiceImpl implements UserService {
         }
 
         userRepository.save(newUser);
+        return "Данные о пользователе были изменены";
     }
 
     @Override
