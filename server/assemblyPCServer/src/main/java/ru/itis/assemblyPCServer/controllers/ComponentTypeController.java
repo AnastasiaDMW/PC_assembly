@@ -10,7 +10,7 @@ import ru.itis.assemblyPCServer.services.ComponentTypeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/component")
+@RequestMapping("/api/component_type")
 public class ComponentTypeController {
 
     @Autowired

@@ -19,16 +19,16 @@ public class AssemblyController {
     private AssemblyService assemblyService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> saveCustomer(@RequestBody Assembly assembly) {
+    public ResponseEntity<?> saveAssembly(@RequestBody Assembly assembly) {
         return new ResponseEntity<>(assemblyService.saveAssembly(assembly), HttpStatus.CREATED);
     }
 
-    @GetMapping("/all_assembly")
-    public ResponseEntity<?> getCustomers() {
+    @GetMapping("/assemblies")
+    public ResponseEntity<?> getAssemblies() {
         return new ResponseEntity<>(assemblyService.getAllAssembly(), HttpStatus.OK);
     }
 
-    @GetMapping("/get_assembly_by_id")
+    @GetMapping("/assembly_by_id")
     public ResponseEntity<?> getAssemblyById(@RequestParam Long id) {
         return new ResponseEntity<>(assemblyService.getAssemblyById(id), HttpStatus.OK);
     }
@@ -46,5 +46,4 @@ public class AssemblyController {
                 .contentType(MediaType.valueOf("image/png"))
                 .body(imageData);
     }
-
 }

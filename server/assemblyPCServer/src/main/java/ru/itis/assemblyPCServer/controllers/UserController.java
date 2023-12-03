@@ -54,12 +54,12 @@ public class UserController {
         return new ResponseEntity<>(userService.saveUserAssembly(user), HttpStatus.CREATED);
     }
 
-    @GetMapping("/add_user_assembly")
+    @GetMapping("/users_assemblies")
     public ResponseEntity<?> getUserAssembly() {
         return new ResponseEntity<>(userService.getUserAssembly(), HttpStatus.OK);
     }
 
-    @GetMapping("/get_user_assembly")
+    @GetMapping("/user_assembly")
     public User getUserAssemblyById(@RequestParam Long userAssemblyId) {
         return userService.getUserAssemblyById(userAssemblyId);
     }

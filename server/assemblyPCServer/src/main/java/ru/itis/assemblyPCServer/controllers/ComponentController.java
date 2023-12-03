@@ -26,12 +26,12 @@ public class ComponentController {
 
     //Возможно здесь @PathVariable Long id
     // api/component/components?componentTypeId=2 - По типу "Процессоры"
-    @GetMapping("/components")
+    @GetMapping("/components_by_type")
     public List<ComponentDto> getComponentByTypeId(@RequestParam Long componentTypeId){
         return componentService.getComponentByTypeId(componentTypeId);
     }
 
-    @GetMapping("/get_component_by_id")
+    @GetMapping("/component_by_id")
     public ComponentDto getComponentById(@RequestParam Long id) {
         return componentService.getComponentDtoById(id);
     }
