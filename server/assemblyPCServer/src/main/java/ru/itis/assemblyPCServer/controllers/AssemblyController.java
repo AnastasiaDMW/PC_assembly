@@ -35,13 +35,13 @@ public class AssemblyController {
 
     @PostMapping("/fileSystem")
     public ResponseEntity<?> uploadImageToFileSystem(@RequestParam("image") MultipartFile file) throws IOException {
-        String uploadImage = assemblyService.uploadAvatarToFileSystem(file);
+        String uploadImage = assemblyService.uploadAssemblyToFileSystem(file);
         return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
     }
 
     @GetMapping("/fileSystem/{filename}")
     public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable String filename) throws IOException {
-        byte[] imageData = assemblyService.downloadAvatarFromFileSystem(filename);
+        byte[] imageData = assemblyService.downloadAssemblyFromFileSystem(filename);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(imageData);

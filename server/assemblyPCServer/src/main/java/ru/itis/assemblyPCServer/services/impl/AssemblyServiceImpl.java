@@ -80,7 +80,7 @@ public class AssemblyServiceImpl implements AssemblyService {
     }
 
     @Override
-    public String uploadAvatarToFileSystem(MultipartFile file) throws IOException {
+    public String uploadAssemblyToFileSystem(MultipartFile file) throws IOException {
         boolean isNameExist = Boolean.FALSE;
         String filePath;
         String fileName;
@@ -110,7 +110,7 @@ public class AssemblyServiceImpl implements AssemblyService {
     }
 
     @Override
-    public byte[] downloadAvatarFromFileSystem(String filename) throws IOException {
+    public byte[] downloadAssemblyFromFileSystem(String filename) throws IOException {
         String filePath = new File(FOLDER_PATH).getAbsolutePath()+"\\"+filename;
         return Files.readAllBytes(new File(filePath).toPath());
     }

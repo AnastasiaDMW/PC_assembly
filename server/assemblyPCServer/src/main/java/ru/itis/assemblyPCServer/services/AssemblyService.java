@@ -14,9 +14,9 @@ public interface AssemblyService {
 
     List<Assembly> getAllAssembly();
 
-    String uploadAvatarToFileSystem(MultipartFile file) throws IOException;
+    String uploadAssemblyToFileSystem(MultipartFile file) throws IOException;
 
-    byte[] downloadAvatarFromFileSystem(String filename) throws IOException;
+    byte[] downloadAssemblyFromFileSystem(String filename) throws IOException;
 
     Assembly getAssemblyById(Long id);
 }
