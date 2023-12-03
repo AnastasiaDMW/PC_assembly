@@ -1,18 +1,14 @@
 package ru.itis.assemblyPCServer.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itis.assemblyPCServer.models.Assembly;
-import ru.itis.assemblyPCServer.models.AssemblyType;
-import ru.itis.assemblyPCServer.models.Component;
 import ru.itis.assemblyPCServer.models.User;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -28,7 +24,8 @@ public class AssemblyDto {
     private String images;
     private String availability;
 
-    private Collection<ComponentDto> components;
+//    private Collection<ComponentDto> components;
+    private Collection<User> users;
 
     public static AssemblyDto from(Assembly assembly) {
         return AssemblyDto.builder()
@@ -38,7 +35,8 @@ public class AssemblyDto {
                 .dateCreated(assembly.getDateCreated())
                 .availability(assembly.getAvailability())
                 .assemblyCode(assembly.getAssemblyCode())
-                .components(ComponentDto.from(assembly.getComponents()))
+//                .components(ComponentDto.from(assembly.getComponents()))
+                .users(assembly.getUsers())
                 .build();
     }
 

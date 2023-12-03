@@ -5,13 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import ru.itis.assemblyPCServer.dto.AssemblyDto;
 import ru.itis.assemblyPCServer.dto.UserDto;
 import ru.itis.assemblyPCServer.encrypt.Hashing;
-import ru.itis.assemblyPCServer.models.Form;
-import ru.itis.assemblyPCServer.models.User;
-import ru.itis.assemblyPCServer.models.UserRole;
+import ru.itis.assemblyPCServer.models.*;
 import ru.itis.assemblyPCServer.repositories.UserRepository;
 import ru.itis.assemblyPCServer.repositories.UserRoleRepository;
+import ru.itis.assemblyPCServer.services.AssemblyService;
 import ru.itis.assemblyPCServer.services.UserService;
 
 import java.io.File;
@@ -20,9 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,6 +30,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private AssemblyService assemblyService;
 
     @Override
     public String login(Form auth) throws NoSuchAlgorithmException {
@@ -160,7 +161,6 @@ public class UserServiceImpl implements UserService {
         }
 
         filePath = new File(FOLDER_PATH).getAbsolutePath()+"\\"+fileName;
-
         file.transferTo(new File(filePath));
 
         return "image uploaded successfully: "+fileName;
@@ -170,5 +170,36 @@ public class UserServiceImpl implements UserService {
     public byte[] downloadAvatarFromFileSystem(String filename) throws IOException {
         String filePath = new File(FOLDER_PATH).getAbsolutePath()+"\\"+filename;
         return Files.readAllBytes(new File(filePath).toPath());
+    }
+
+    @Override
+    public User saveUserAssembly(User user) {
+
+        System.out.println(user.getId());
+        User newUser = userRepository.findByid(user.getId());
+        System.out.println(newUser.getName());
+
+        newUser.getAssemblies().addAll(
+                user.getAssemblies().stream().map( u -> {
+                    Assembly assembly = assemblyService.getAssemblyById(u.getId());
+                    System.out.println(assembly.getTitle());
+                    assembly.getUsers().add(newUser);
+                    assembly.setCarts(new ArrayList<Cart>());
+                    assembly.setComponents(new ArrayList<Component>());
+                    return assembly;
+                }).toList()
+        );
+
+        return userRepository.save(newUser);
+    }
+
+    @Override
+    public List<User> getUserAssembly() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User getUserAssemblyById(Long userAssemblyId) {
+        return userRepository.findByid(userAssemblyId);
     }
 }

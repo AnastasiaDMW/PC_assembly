@@ -1,6 +1,8 @@
 package ru.itis.assemblyPCServer.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,19 +32,14 @@ public class Assembly {
     private String images;
     private String availability;
 
-    @ManyToOne
-    @JoinColumn(name = "assembly_type_id")
-    @JsonIgnore
-    private AssemblyType assemblyType;
-
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_assembly",
             joinColumns = {@JoinColumn(name = "assembly_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
     @JsonIgnore
-    private Set<User> users;
+    private Collection<User> users = new ArrayList<>();
 
     @ManyToMany(mappedBy = "assemblies")
     private Collection<Component> components = new ArrayList<>();

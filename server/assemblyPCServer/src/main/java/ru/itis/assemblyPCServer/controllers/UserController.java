@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.assemblyPCServer.dto.UserDto;
 import ru.itis.assemblyPCServer.models.Form;
+import ru.itis.assemblyPCServer.models.User;
 import ru.itis.assemblyPCServer.services.UserService;
 
 import java.io.IOException;
@@ -46,6 +47,21 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(imageData);
+    }
+
+    @PostMapping("/add_user_assembly")
+    public ResponseEntity<?> saveUserAssembly(@RequestBody User user) {
+        return new ResponseEntity<>(userService.saveUserAssembly(user), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/add_user_assembly")
+    public ResponseEntity<?> getUserAssembly() {
+        return new ResponseEntity<>(userService.getUserAssembly(), HttpStatus.OK);
+    }
+
+    @GetMapping("/get_user_assembly")
+    public User getUserAssemblyById(@RequestParam Long userAssemblyId) {
+        return userService.getUserAssemblyById(userAssemblyId);
     }
 
 }
