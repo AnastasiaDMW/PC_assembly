@@ -380,7 +380,7 @@
 
 > | name      |  type     | data type               | description                                                           |
 > |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
-> | id      |  required | object (JSON or YAML)   | N/A  |
+> | None      |  required | object (JSON or YAML)   | N/A  |
 
 
 ##### Ответы
