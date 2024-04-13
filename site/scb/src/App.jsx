@@ -1,8 +1,8 @@
-import BeginPage from './components/Begin_Page.jsx';
+import BeginPage from './components/Auth_&_Reg/Begin_Page.jsx';
 import Header from './components/Header';
 import './App.css';
 import './modules/scss/header.scss'
-// import Profile from "./components/Profile.jsx";
+import Profile from "./components/Profle/Profile.jsx";
 
 // const RegisterPage = {
 //   titleText: 'Регистрация',

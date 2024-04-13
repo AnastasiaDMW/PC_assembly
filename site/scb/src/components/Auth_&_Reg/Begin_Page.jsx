@@ -1,7 +1,7 @@
 import BeginPageBottom from "./Begin_Page_Bottom.jsx";
 import FormRegistration from "./Form_Registration.jsx";
 import FormAuthorization from "./Form_Authorization.jsx";
-import '.././modules/scss/authorization.scss'
+import '../../modules/scss/authorization.scss'
 
 export default function BeginPage({page}) {
 

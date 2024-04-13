@@ -1,11 +1,11 @@
 import FormProfile from "./Form_Profile.jsx";
 import ConfigurationPC from "./Configurations_PC.jsx";
 import FavoriteProducts from "./Favorite__Products.jsx";
-import load_foto from '.././assets/load_foto.svg'
-import '.././modules/scss/Favorite_Products.scss'
-import '.././modules/scss/Form_Profile.scss'
-import '.././modules/scss/Configurations_PC.scss'
-import '.././modules/scss/Profile.scss'
+import load_foto from '../../assets/load_foto.svg'
+import '../../modules/scss/Favorite_Products.scss'
+import '../../modules/scss/Form_Profile.scss'
+import '../../modules/scss/Configurations_PC.scss'
+import '../../modules/scss/Profile.scss'
 
 export default function Profile(){
   return <main className="profile">

@@ -1,4 +1,4 @@
-import pc_image from './../../public/assets/images/svg/white_square.svg'
+import pc_image from '../../../public/assets/images/svg/white_square.svg'
 
 export default function ConfigurationPC(){
   return <div className='pc-config'>
