@@ -17,28 +17,28 @@ public class AssemblyController {
 
     @Autowired
     private AssemblyService assemblyService;
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/add")
     public ResponseEntity<?> saveAssembly(@RequestBody Assembly assembly) {
         return new ResponseEntity<>(assemblyService.saveAssembly(assembly), HttpStatus.CREATED);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/assemblies")
     public ResponseEntity<?> getAssemblies() {
         return new ResponseEntity<>(assemblyService.getAllAssembly(), HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/assembly_by_id")
     public ResponseEntity<?> getAssemblyById(@RequestParam Long id) {
         return new ResponseEntity<>(assemblyService.getAssemblyById(id), HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/fileSystem")
     public ResponseEntity<?> uploadImageToFileSystem(@RequestParam("image") MultipartFile file) throws IOException {
         String uploadImage = assemblyService.uploadAssemblyToFileSystem(file);
         return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/fileSystem/{filename}")
     public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable String filename) throws IOException {
         byte[] imageData = assemblyService.downloadAssemblyFromFileSystem(filename);

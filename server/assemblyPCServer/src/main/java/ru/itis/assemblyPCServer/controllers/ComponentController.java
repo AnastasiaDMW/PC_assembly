@@ -18,7 +18,7 @@ public class ComponentController {
 
     @Autowired
     private ComponentService componentService;
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all_components")
     public List<ComponentDto> getComponents() {
         return componentService.getAllComponents();
@@ -26,22 +26,23 @@ public class ComponentController {
 
     //Возможно здесь @PathVariable Long id
     // api/component/components?componentTypeId=2 - По типу "Процессоры"
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/components_by_type")
     public List<ComponentDto> getComponentByTypeId(@RequestParam Long componentTypeId){
         return componentService.getComponentByTypeId(componentTypeId);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/component_by_id")
     public ComponentDto getComponentById(@RequestParam Long id) {
         return componentService.getComponentDtoById(id);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/fileSystem")
     public ResponseEntity<?> uploadImageToFileSystem(@RequestParam("image") MultipartFile file) throws IOException {
         String uploadImage = componentService.uploadComponentToFileSystem(file);
         return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/fileSystem/{filename}")
     public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable String filename) throws IOException {
         byte[] imageData = componentService.downloadComponentFromFileSystem(filename);
