@@ -1,0 +1,144 @@
+.builds{
+  margin-top: 12rem;
+  &__list{
+    display: flex;
+    flex-direction: column;
+    gap:10rem;
+  }
+}
+
+.card{
+  display: grid;
+  row-gap:8rem;
+  column-gap:5rem;
+
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+
+  &__title{
+    font-size:1.5rem;
+  }
+  &__best{
+    color:#9B6195;
+    font:1.5rem 'Montserrat', sans-serif;
+  }
+  &__pc{
+    position:relative;
+    z-index: 1;
+
+    &:before{
+      content: "";
+      position: absolute;
+
+      width:664px;
+      height:728px;
+
+      top: -50px;
+      left: -50px;
+      z-index: 0;
+      background: url("../../assets/builds/pc_bg.svg");
+    }
+  }
+  &__img{
+    position:relative;
+    z-index:2;
+  }
+  &__details{
+
+  }
+  &__link{
+    position: relative;
+    
+    color: rgba(255,255,255,0.65);
+    font-size:1.25rem;
+
+    background: url("../../assets/builds/details_button_comp/details_button.svg") no-repeat;
+    background-size: cover;
+
+    margin-top: 2px;
+
+    padding: 22px 23px 18px 23px;
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:before{
+      content:url('../../assets/builds/details_button_comp/left.svg');
+      position: absolute;
+
+      top:15px;
+      left:-3px;
+    }
+    &:after{
+      content:url('../../assets/builds/details_button_comp/right.svg');
+      position: absolute;
+
+      top:15px;
+      right:-3px;
+    }
+    &:hover{
+      box-shadow: 0 0 45px 0 #9B6195;
+      color: white;
+
+    }
+  }
+}
+
+.card:nth-child(odd){
+
+  & .card__details{
+    grid-column: 2;
+    grid-row:2;
+    align-self: flex-end;
+  }
+  & .card__description{
+    grid-column: 2;
+    grid-row:2;
+    align-self: center;
+  }
+}
+
+.card:nth-child(even){
+  column-gap: 7.5rem;
+  & .card__pc:before{
+    left: -40px;
+  }
+  & .card__title{
+    grid-column: 2;
+  }
+  & .card__best{
+    grid-column: 1;
+    grid-row:1;
+  }
+  & .card__pc{
+    grid-column: 2;
+    grid-row:2;
+  }
+  & .card__details{
+    grid-column: 1;
+    grid-row:2;
+    align-self: flex-end;
+  }
+  & .card__description{
+    grid-column: 1;
+    grid-row:2;
+    align-self: center;
+  }
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+  gap:2.5rem;
+
+  background: #090708;
+  border: 2px solid #9B6195;
+  padding: 3rem 2rem 3rem 2.75rem;
+
+  &__item{
+    list-style: url('../../assets/builds/list_style.svg');
+  }
+
+  &__text{
+    font:1.25rem 'Montserrat', sans-serif;
+  }
+}

@@ -112,12 +112,17 @@ body{
 
   }
 }
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
 .form__password+label {
   position: relative;
 }
 #onemore-before+label:before, .form__password+label:before {
     position: absolute;
-    content:url("../../assets/hide_pass.svg");
+    content:url("../../assets/auth/hide_pass.svg");
     width:36px;
     top: -58px;
     left: 510px;
@@ -140,6 +145,10 @@ body{
     height:2px;
     background: linear-gradient(to right,#5721B7 0%,#D668CD 100%);
     box-shadow: -23px 3px 40px 3px #5721B7,23px 3px 40px 3px #D668CD;
+  }
+  &:hover{
+    color: #00848C;
+    cursor: pointer;
   }
 }
 

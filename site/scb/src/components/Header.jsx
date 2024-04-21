@@ -1,10 +1,10 @@
-import logo from '../../public/assets/images/svg/logo2.svg'
+import logo from '../../public/assets/images/svg/logo.svg'
 import avatar from './../../public/assets/images/svg/avatar.svg'
 
 export default function Header({isBeginPage}){
   return <header className='page-header header'>
     <img src={logo} alt="Логотип SCB" className="header__logo"/>
-    {isBeginPage &&
+    {!isBeginPage &&
     <nav className="header__navbar navbar">
       <ul className="navbar__list">
         <li className="navbar__item"><span className="navbar__text">Конфигуратор</span></li>
