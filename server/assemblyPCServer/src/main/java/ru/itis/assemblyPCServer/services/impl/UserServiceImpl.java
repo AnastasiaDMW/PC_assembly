@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService {
         newUser.setUserRole(userRole);
 
         userRepository.save(newUser);
+
         return "Пользователь зарегистрирован";
     }
 
