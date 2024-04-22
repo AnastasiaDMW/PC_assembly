@@ -1,0 +1,13 @@
+.home{
+  position: relative;
+  &:before{
+    content:url('../../assets/home/r-b-block.png');
+    position: absolute;
+
+    width:927px;
+    height: 564px;
+
+    top:0;
+    left: -800  px;
+  }
+}

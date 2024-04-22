@@ -3,7 +3,7 @@ import Header from './components/Header';
 import './modules/css/reset.css'
 import './App.css';
 import Profile from "./components/Profle/Profile.jsx";
-import Builds from "./components/Builds/Builds.jsx";
+import Builds from "../../../client/src/components/Builds/Builds.jsx";
 import './modules/scss/header.scss'
 import './modules/scss/builds.scss'
 import Home from "./components/Home.jsx";

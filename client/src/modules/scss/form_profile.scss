@@ -1,0 +1,28 @@
+.profile__input-list{
+  margin-top: 3.75rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__input{
+    position: relative;
+
+    border: 2px solid #9B6195;
+    background: none;
+
+    width: 573px;
+    height: 90px;
+
+    padding:0 30px;
+
+    font: 1.5rem "Montserrat",sans-serif;
+    &::placeholder{
+      position: absolute;
+      top: 7px;
+      left: 30px;
+
+      font: 1.25rem ;
+    }
+  }
+}

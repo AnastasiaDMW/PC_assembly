@@ -68,17 +68,26 @@ body{
   width:35.8125rem;
 
   &__userdata{
+    position: relative;
+
     width: 573px;
 
     border: 1px solid #00848C;
     border-radius:4px;
-    padding:0 10px;
+    padding:0 30px;
     background: none;
 
     height:5rem;
-    font-size:1.2rem;
+    font: 1.5rem "Montserrat",sans-serif;
+
     &::placeholder {
+      position: absolute;
+      top: 7px;
+      left: 30px;
+
       text-align: center;
+      font: 1.25rem "Montserrat",sans-serif;
+
     }
   }
   &__userdata::placeholder{
@@ -112,12 +121,17 @@ body{
 
   }
 }
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
 .form__password+label {
   position: relative;
 }
 #onemore-before+label:before, .form__password+label:before {
     position: absolute;
-    content:url("../../assets/hide_pass.svg");
+    content:url("../../assets/auth/hide_pass.svg");
     width:36px;
     top: -58px;
     left: 510px;
@@ -140,6 +154,10 @@ body{
     height:2px;
     background: linear-gradient(to right,#5721B7 0%,#D668CD 100%);
     box-shadow: -23px 3px 40px 3px #5721B7,23px 3px 40px 3px #D668CD;
+  }
+  &:hover{
+    color: #00848C;
+    cursor: pointer;
   }
 }
 
