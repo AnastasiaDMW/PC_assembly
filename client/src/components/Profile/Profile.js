@@ -8,7 +8,7 @@ import FormProfile from './Form_Profile';
 import ConfigurationPC from './Configurations_PC';
 import FavoriteProducts from './Favorite__Products';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useNavigation } from 'react-router-dom';
 
 export default function Profile({userAuthorize}) {
 
@@ -21,29 +21,24 @@ export default function Profile({userAuthorize}) {
         isRegisterPage: false
     });
 
+    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-      const handleBack = (event) => {
-          if (event.state && event.state.prevPath === '/auth/login') {
-              // Действия при нажатии кнопки "назад" после перехода с /auth/login
-              // Например, перенаправление на другую страницу
-              console.log("зашел");
+      const handlePopstate = () => {
+          // Проверяем текущий URL
+          if (window.location.pathname === '/profile') {
+              // Если пользователь переходит назад на страницу профиля, перенаправляем его на нужный URL
               navigate('/');
-          } else {
-            console.log("зашел в else");
-              // Действия при нажатии кнопки "назад" в других случаях
-              // Например, обновление данных
-              // Обработка нажатия кнопки "назад" в вашем приложении
           }
       };
 
-      window.addEventListener('popstate', handleBack);
+      window.addEventListener('popstate', handlePopstate);
 
       return () => {
-          window.removeEventListener('popstate', handleBack);
+          window.removeEventListener('popstate', handlePopstate);
       };
-    }, [navigate]);
+  }, [navigate]);
 
     function updateUserId(userId) {
         setUserId(userId);
