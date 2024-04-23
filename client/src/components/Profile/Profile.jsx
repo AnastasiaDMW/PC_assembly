@@ -1,14 +1,18 @@
+// eslint-disable-next-line
+
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import '../../modules/scss/favorite_products.scss'
 import '../../modules/scss/form_profile.scss'
 import '../../modules/scss/сonfigurations_pc.scss'
 import '../../modules/scss/profile.scss'
+
 import FormProfile from './Form_Profile';
 import ConfigurationPC from './Configurations_PC';
 import FavoriteProducts from './Favorite__Products';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import button from "../../assets/profile/profile_button/profile_button.svg";
+
 import change_foto_button from "../../assets/profile/change_foto_button.svg";
 import load_foto_icon from "../../assets/profile/cat.png";
 

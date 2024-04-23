@@ -1,21 +1,25 @@
+import React from 'react'
+import { Link } from 'react-router-dom';
 import logo from '../../src/images/svg/logo2.svg'
 import avatar from './../../src/images/svg/avatar.svg'
-import React from 'react'
 
 export default function Header({isBeginPage}){
   return <header className='page-header header'>
     <img src={logo} alt="Логотип SCB" className="header__logo"/>
-    {isBeginPage &&
+
+    {!isBeginPage &&
     <nav className="header__navbar navbar">
       <ul className="navbar__list">
-        <li className="navbar__item"><span className="navbar__text">Конфигуратор</span></li>
-        <li className="navbar__item"><span className="navbar__text">Готовые сборки</span></li>
-        <li className="navbar__item"><span className="navbar__text">Корзина</span></li>
+        <li className="navbar__item"><Link to = '/' className="navbar__text">Главная</Link></li>
+        <li className="navbar__item"><Link to = '/builds' className="navbar__text">Готовые сборки</Link></li>
+        <li className="navbar__item"><Link to = '/' className="navbar__text">Конфигуратор</Link></li>
       </ul>
     </nav>
     }
     <div className="header__profile">
-      <img src={avatar} alt="Фото профиля" className="header__profile__foto"/>
+      <Link to = '/profile' className="navbar__profile-link">
+        <img src={avatar} alt="Фото профиля" className="header__profile__foto"/>
+      </Link>
     </div>
   </header>
 }

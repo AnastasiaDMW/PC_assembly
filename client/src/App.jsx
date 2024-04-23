@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
@@ -10,11 +12,11 @@ import FormRegistration from "./components/Auth_&_Reg/FormRegistration";
 import FormAuthorization from "./components/Auth_&_Reg/FormAuthorization";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Main/Home";
+import Builds from "./components/Builds/Builds";
 
 import "react-toastify/dist/ReactToastify.css";
 import './modules/scss/header.scss';
 import './css/App.css';
-import Builds from "./components/Builds/Builds";
 
 
 export default function App() {
@@ -68,6 +70,7 @@ export default function App() {
             <Route path="login" element={<FormAuthorization onAuth={auth} onClick={showPassword}/>} />
             <Route path="register" element={<FormRegistration onClick={showPassword} onRegistrationSuccess={handleRegistrationSuccess} />} />
           </Route>
+          <Route path="/builds" element={<Builds />} />
         </Routes>
       </div>
   );

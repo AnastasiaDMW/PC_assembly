@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
+// eslint-disable-next-line
 
+import { useState, useEffect } from "react"
 export default function FormProfile({onUpdateUser}){
 
   const [isChange, setIsChange] = useState(false);
@@ -12,7 +13,7 @@ export default function FormProfile({onUpdateUser}){
   })
 
   useEffect(() => {
-    isChangeData();
+    isChangeData()
   }, [user]);
 
   const handleChange = (e) => {
@@ -47,7 +48,7 @@ export default function FormProfile({onUpdateUser}){
       <input type="email" name="email" value={user.email} onChange={handleChange} className="profile__input-list__input email-input" placeholder='Email'/>
     </li>
     { isChange === true && (
-    <button type='button'  onClick={updateUser} className="form__button">Сохранить изменения</button>
+      <button type='submit'  onClick={updateUser} className="form__button">Сохранить изменения</button>
     )}
   </ul>
 }

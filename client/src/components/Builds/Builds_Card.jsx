@@ -23,7 +23,7 @@ export default function BuildsCard({title,description}){
       </ul>
     </div>
     <div className="card__details">
-      <a href="#" className="card__link">
+      <a href="" className="card__link">
         Подробнее
       </a>
     </div>

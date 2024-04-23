@@ -1,6 +1,5 @@
 import BuildsCard from "./Builds_Card.jsx";
-
-
+import '../../modules/scss/builds.scss'
 
 export default function Builds(){
   const CARDS = [
