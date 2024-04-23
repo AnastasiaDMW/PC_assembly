@@ -1,0 +1,131 @@
+.profile {
+  position: relative;
+  z-index: 2;
+  margin-top: 6.5rem;
+  display: flex;
+  gap: 6rem;
+}
+.profile:before {
+  content: url("../../assets/bg_img/squares.svg");
+  position: absolute;
+  z-index: 0;
+  top: -50px;
+  left: 870px;
+  opacity: 0.7;
+}
+.profile__left-side {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #9B6195;
+  background: rgb(7, 7, 7);
+  backdrop-filter: blur(60px);
+  padding: 0 90px 0 90px;
+}
+.profile__right-side {
+  z-index: 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto 1fr;
+  column-gap: 1.25rem;
+  row-gap: 2.5rem;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+.profile__title {
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: #ffffff;
+  text-shadow: 0 -1px 2px #00848C, 0 -1px 2px #00848C, 0 1px 2px #00848C, 0 1px 2px #00848C, -1px 0 2px #00848C, 1px 0 2px #00848C, -1px 0 2px #00848C, 1px 0 2px #00848C, -1px -1px 2px #00848C, 1px -1px 2px #00848C, -1px 1px 2px #00848C, 1px 1px 2px #00848C, -1px -1px 2px #00848C, 1px -1px 2px #00848C, -1px 1px 2px #00848C, 1px 1px 2px #00848C;
+}
+.profile__foto-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 21.625rem;
+  height: 21.625rem;
+  background: url(../../assets/profile/bg_user_image.svg) no-repeat;
+  background-size: cover;
+}
+.profile__foto {
+  position: relative;
+  left: 2px;
+  max-width: 285px;
+}
+.profile__change-foto-button {
+  cursor: pointer;
+  display: block;
+  height: 60.2px;
+  margin-top: 140px;
+}
+.profile__change-foto-icon {
+  background-color: #000;
+  border: 2px solid white;
+  padding: 6px 6px 10px 10px;
+}
+.profile__change-foto-input {
+  overflow: hidden;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  position: relative;
+  z-index: -1;
+}
+.profile__save {
+  justify-self: center;
+  grid-column: 2/3;
+}
+.profile__save__ {
+  background: rgb(14, 14, 14);
+}
+.profile__save-button {
+  position: relative;
+  white-space: wrap;
+  padding: 23px 70.5px 20px 70.5px;
+  background: url(../../assets/profile/profile_button/profile_button.svg) no-repeat;
+  font-size: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+.profile__save-button:hover {
+  box-shadow: 0 0 45px 0 #00848C;
+}
+.profile__save-button:before {
+  content: url("../../assets/profile/profile_button/left_decor.svg");
+  position: absolute;
+  bottom: -5px;
+  left: -12px;
+}
+.profile__save-button:after {
+  content: url("../../assets/profile/profile_button/right_decor.svg");
+  position: absolute;
+  top: 16px;
+  right: -10px;
+}
+
+.blue-title {
+  color: #00848C;
+  font-size: 2rem;
+}
+
+.profile__bg-decor--1:before {
+  content: url("../../assets/bg_img/way1.svg");
+  position: absolute;
+  top: 120px;
+  left: -280px;
+}
+.profile__bg-decor--1:after {
+  content: url("../../assets/bg_img/way.svg");
+  position: absolute;
+  top: 900px;
+  right: -800px;
+}
+.profile__bg-decor--2:before {
+  content: url("../../assets/bg_img/way2.svg");
+  position: absolute;
+  top: 950px;
+  right: -800px;
+}
+
+/*# sourceMappingURL=profile.css.map */
