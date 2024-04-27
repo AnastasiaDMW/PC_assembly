@@ -69,12 +69,34 @@ export default function Profile({userAuthorize}) {
     }, [userData]);
 
     function checkUserData() {
+      console.log(image);
       console.log(userEmail);
       console.log(userData);
       console.log(userPhoto);
     }
 
     const [image, setImage] = useState(null);
+
+    const handleImageUpload = async () => {
+      if (!image) {
+        return;
+      }
+    
+      const formData = new FormData();
+      formData.append('image', image);
+    
+      try {
+        const response = await axios.post('http://localhost:9090/api/user/fileSystem', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+    
+        console.log('Файл успешно загружен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при загрузке файла:', error);
+      }
+    };
 
     return (
         <main className="profile">
@@ -104,7 +126,7 @@ export default function Profile({userAuthorize}) {
             </div>
             <div className='profile__save'>
               <div className="profile__save__">
-                <button className='profile__save-button' onClick={checkUserData}>Сохранить<br/>изменения</button>
+                <button className='profile__save-button' onClick={handleImageUpload}>Сохранить<br/>изменения</button>
               </div>
             </div>
           </div>

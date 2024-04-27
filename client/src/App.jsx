@@ -1,5 +1,3 @@
-// eslint-disable-next-line
-
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -50,8 +48,19 @@ export default function App() {
   function handleRegistrationSuccess() {
       setIsRegister(false);
   }
+
   useEffect(() => {
-    localStorage.clear();
+    localStorage.setItem('userEmail', "");
+
+    const handleBeforeUnload = () => {
+      localStorage.clear();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
 
   function showPassword(ref){
