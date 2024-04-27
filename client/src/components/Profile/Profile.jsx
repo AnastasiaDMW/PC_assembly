@@ -19,15 +19,15 @@ import change_foto_button from "../../assets/profile/change_foto_button.svg";
 export default function Profile({userAuthorize}) {
 
     const [userEmail, setUserEmail] = useState('');
-    const [userPhoto, setUserPhoto] = useState("");
+    const baseUrl = "http://localhost:9090/api/user/fileSystem/"
+    const [userAvatarUrl, setUserAvatarUrl] = useState("");
     const [image, setImage] = useState(null);
-    const [userAvatarUrl, setUserAvatarUrl] = useState("http://localhost:9090/api/user/fileSystem/CatDefaultAvatar.png");
     const [userData, setUserData] = useState({
       id: 0,
       name: "",
       lastname: "",
       email: "",
-      photo: "",
+      photo: "http://localhost:9090/api/user/fileSystem/CatDefaultAvatar.png",
       bonuses: 0,
       phoneNumber: "",
       assemblies: []
@@ -45,10 +45,6 @@ export default function Profile({userAuthorize}) {
         getUser();
         setImage(userData.photo)
       }
-      if (userAvatarUrl === "") {
-        getUserAvatar();
-      }
-      console.log(userData);
     }, [userEmail]);
 
     useEffect(() => {
@@ -71,55 +67,56 @@ export default function Profile({userAuthorize}) {
       }
     }
 
-    function getUserAvatar() {
-        let baseUrl = "http://localhost:9090/api/user/fileSystem/"
-        setUserAvatarUrl(baseUrl+userData.photo);
-    }
-
     const handleUserData = (user) => {
       localStorage.setItem('userData', user);
     };
 
     useEffect(() => {
-      setUserPhoto(userData.photo);
       handleUserData(userData);
     }, [userData]);
 
     const handleImageUpload = async () => {
-      let info;
+      console.log(userEmail);
+      console.log(userData);
+      console.log(userData.photo);
+      // let info;
 
-      if (!image) {
-        return;
-      }
+      // if (!image) {
+      //   return;
+      // }
     
-      const formData = new FormData();
-      formData.append('image', image);
+      // const formData = new FormData();
+      // formData.append('image', image);
     
-      try {
-        const responseImage = await axios.post('http://localhost:9090/api/user/fileSystem', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        const responseChangeAvatar = await axios.post('http://localhost:9090/api/user/change_avatar', {
-          id: userData.id,
-          avatar: image.name,
-        });
-        console.log('Файл успешно загружен:', responseImage.data);
-        console.log('Название файла изменено', responseChangeAvatar.data);
-        console.log(image.name);
-        info = "Аватарка пользователя изменена"
-        toast.success(info, {
-          position: "top-center",
-        });
-        getUserAvatar();
-      } catch (error) {
-        info = "Ошибка при загрузке файла"
-        toast.error(info, {
-          position: "top-center",
-        });
-        console.error('Ошибка при загрузке файла:', error);
-      }
+      // try {
+      //   const responseImage = await axios.post('http://localhost:9090/api/user/fileSystem', formData, {
+      //     headers: {
+      //       'Content-Type': 'multipart/form-data',
+      //     },
+      //   });
+      //   const responseChangeAvatar = await axios.post('http://localhost:9090/api/user/change_avatar', {
+      //     id: userData.id,
+      //     avatar: image.name,
+      //   });
+      //   console.log('Файл успешно загружен:', responseImage.data);
+      //   console.log('Название файла изменено', responseChangeAvatar.data);
+      //   console.log(image.name);
+      //   setUserData(prevUser => ({
+      //     ...prevUser,
+      //     photo: image.name
+      //   }));
+      //   info = "Аватарка пользователя изменена"
+      //   toast.success(info, {
+      //     position: "top-center",
+      //   });
+      //   getUserAvatar();
+      // } catch (error) {
+      //   info = "Ошибка при загрузке файла"
+      //   toast.error(info, {
+      //     position: "top-center",
+      //   });
+      //   console.error('Ошибка при загрузке файла:', error);
+      // }
     };
 
     return (
@@ -145,7 +142,8 @@ export default function Profile({userAuthorize}) {
               </form>
             </div>
             <div className="profile__foto-block">
-              <ImageLoader imageUrl={userAvatarUrl} alt="" className="profile__foto"/>
+              { userData.photo === "CatDefaultAvatar.png" && <ImageLoader imageUrl={URL.createObjectURL(image)} className="profile__foto"/>}
+              { userData.photo !== "CatDefaultAvatar.png" && <ImageLoader imageUrl={baseUrl+userData.photo} className="profile__foto"/>}
             </div>
             <div className='profile__save'>
               <div className="profile__save__">

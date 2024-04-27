@@ -43,6 +43,7 @@ export default function FormAuthorization({onChangeEmail, onAuth, onClick}){
             position: "top-center",
           });
           handleLogin(loginData.email)
+          console.log(loginData.email);
           onAuth(true);
           setLoginData({
             email: '',
