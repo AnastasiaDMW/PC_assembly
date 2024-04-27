@@ -19,7 +19,7 @@ export default function Profile({userAuthorize}) {
 
     const [userEmail, setUserEmail] = useState('');
     const [userPhoto, setUserPhoto] = useState("");
-
+    // const [image, setImage] = useState(null);
     const [userData, setUserData] = useState({
       id: 0,
       name: "",
@@ -102,8 +102,8 @@ export default function Profile({userAuthorize}) {
               {!image && <img src={load_foto_icon} alt="" className="profile__foto"/>}
             </div>
             <div className='profile__save'>
-            <div className="profile__save__">
-                <button type = 'submit' className='profile__save-button'>Сохранить<br/>изменения</button>
+              <div className="profile__save__">
+                <button className='profile__save-button' onClick={checkUserData}>Сохранить<br/>изменения</button>
               </div>
             </div>
           </div>
