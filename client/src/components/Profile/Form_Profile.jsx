@@ -26,15 +26,15 @@ export default function FormProfile(){
 
   // const [changedData, setChangedData] = useState(false);
 
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem('userData');
-  //   if (storedUser) {
-  //     setUserData(storedUser);
-  //     console.log("Полученный пользователь", userData);
-  //   }
+  useEffect(() => {
+    const storedUser = localStorage.getItem('userData');
+    if (storedUser) {
+      setUserData(storedUser);
+      console.log("Полученный пользователь", userData);
+    }
     
-  //   isChangeData()
-  // }, [user]);
+    // isChangeData()
+  }, [user]);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('userData');
