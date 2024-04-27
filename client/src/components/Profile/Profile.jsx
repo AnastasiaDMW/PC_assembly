@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { toast } from "react-toastify";
-import ImageLoader from './ImageLoader';
+import ImageLoader from '../Profile/ImageLoader';
 
 import '../../modules/scss/favorite_products.scss'
 import '../../modules/scss/form_profile.scss'
@@ -27,7 +27,7 @@ export default function Profile({userAuthorize}) {
       name: "",
       lastname: "",
       email: "",
-      photo: "http://localhost:9090/api/user/fileSystem/CatDefaultAvatar.png",
+      photo: "CatDefaultAvatar.png",
       bonuses: 0,
       phoneNumber: "",
       assemblies: []
@@ -142,8 +142,8 @@ export default function Profile({userAuthorize}) {
               </form>
             </div>
             <div className="profile__foto-block">
-              { userData.photo === "CatDefaultAvatar.png" && <ImageLoader imageUrl={URL.createObjectURL(image)} className="profile__foto"/>}
-              { userData.photo !== "CatDefaultAvatar.png" && <ImageLoader imageUrl={baseUrl+userData.photo} className="profile__foto"/>}
+              { !image && <ImageLoader imageUrl={URL.createObjectURL(image)} className="profile__foto"/>}
+              { image && <ImageLoader imageUrl={baseUrl+userData.photo} className="profile__foto"/>}
             </div>
             <div className='profile__save'>
               <div className="profile__save__">
