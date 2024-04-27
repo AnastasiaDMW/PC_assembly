@@ -19,7 +19,7 @@ export default function Profile({userAuthorize}) {
 
     const [userEmail, setUserEmail] = useState('');
     const [userPhoto, setUserPhoto] = useState("");
-
+    // const [image, setImage] = useState(null);
     const [userData, setUserData] = useState({
       id: 0,
       name: "",
@@ -74,6 +74,8 @@ export default function Profile({userAuthorize}) {
       console.log(userPhoto);
     }
 
+    const [image, setImage] = useState(null);
+
     return (
         <main className="profile">
           <div className="profile__left-side">
@@ -86,12 +88,19 @@ export default function Profile({userAuthorize}) {
           </div>
           <div className="profile__right-side">
             <div className='profile__change-foto'>
-              <button onClick={() => {}} className='profile__change-foto-button'>
-                <img src={change_foto_button} alt=''/>
-              </button>
+              <form action="" className="profile__change-foto-form">
+                <label  className='profile__change-foto-button'>
+                  <input onChange={(event) => {
+                    setImage(event.target.files[0])
+                  }}
+                    type='file' className='profile__change-foto-input'/>
+                  <img src={change_foto_button} alt='' className='profile__change-foto-icon'/>
+                </label>
+              </form>
             </div>
             <div className="profile__foto-block">
-              <img src={load_foto_icon} alt="" className="profile__foto"/>
+              {image && <img src={URL.createObjectURL(image)} alt="" className="profile__foto"/>}
+              {!image && <img src={load_foto_icon} alt="" className="profile__foto"/>}
             </div>
             <div className='profile__save'>
               <div className="profile__save__">
