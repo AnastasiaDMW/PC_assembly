@@ -1,15 +1,25 @@
 
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import '../../modules/scss/home.scss'
 
-export default function Home({userAuthorize}) {
+export default function Home({}) {
 
   let navigate = useNavigate();
+
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+      const storedEmail = localStorage.getItem('userEmail');
+      if (storedEmail) {
+        setUserEmail(storedEmail);
+      }
+    }, []);
 
   return (
     <>
       <button onClick={() => {
-        if (userAuthorize)
+        if (userEmail !== "")
           navigate("/profile");
         else
           navigate("/auth/login");

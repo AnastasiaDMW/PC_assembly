@@ -1,8 +1,7 @@
-// eslint-disable-next-line
-
 import * as React from 'react';
 import {useEffect,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 import '../../modules/scss/favorite_products.scss'
 import '../../modules/scss/form_profile.scss'
@@ -18,49 +17,61 @@ import load_foto_icon from "../../assets/profile/load_foto_icon.svg";
 
 export default function Profile({userAuthorize}) {
 
-    const [userId, setUserId] = useState(0);
-    const [user, setUser] = useState({
-        id: userId,
-        login: "",
-        photo: "",
-        email: "",
-        isRegisterPage: false
-    });
+    const [userEmail, setUserEmail] = useState('');
+    const [userPhoto, setUserPhoto] = useState("");
 
-    const navigate = useNavigate();
+    const [userData, setUserData] = useState({
+      id: 0,
+      name: "",
+      lastname: "",
+      email: "",
+      photo: "",
+      bonuses: 0,
+      phoneNumber: "",
+      assemblies: []
+    })
+
+    const getUser = async (e) => {
+      try {
+        const response = await axios.get("http://localhost:9090/api/user/user_email", {
+          params: {
+            email: userEmail,
+          }
+        });
+        const user = response.data;
+        setUserData(user);
+        console.log(user)
+      } catch (err) {
+        console.error("Ошибка при получении данных", err);
+      }
+    }
 
     useEffect(() => {
-      const handleBack = (event) => {
-          if (event.state && event.state.prevPath === '/auth/login') {
-              // Действия при нажатии кнопки "назад" после перехода с /auth/login
-              // Например, перенаправление на другую страницу
-              console.log("зашел");
-              navigate('/');
-          } else {
-            console.log("зашел в else");
-              // Действия при нажатии кнопки "назад" в других случаях
-              // Например, обновление данных
-              // Обработка нажатия кнопки "назад" в вашем приложении
-          }
-      };
+      const storedEmail = localStorage.getItem('userEmail');
+      if (storedEmail) {
+        setUserEmail(storedEmail);
+      }
+    }, []);
+    
+    useEffect(() => {
+      if (userEmail && userData.email === "") {
+        getUser();
+      }
+    }, [userEmail]);
 
-      window.addEventListener('popstate', handleBack);
+    const handleUserData = (user) => {
+      localStorage.setItem('userData', user);
+    };
 
-      return () => {
-          window.removeEventListener('popstate', handleBack);
-      };
-    }, [navigate]);
+    useEffect(() => {
+      setUserPhoto(userData.photo);
+      handleUserData(userData);
+    }, [userData]);
 
-    function updateUserId(userId) {
-        setUserId(userId);
-    }
-
-    function updateUser(user) {
-        setUser(user);
-    }
-
-    function handleClick() {
-        navigate('/auth/login');
+    function checkUserData() {
+      console.log(userEmail);
+      console.log(userData);
+      console.log(userPhoto);
     }
     const [image, setImage] = useState(null);
 
@@ -70,7 +81,7 @@ export default function Profile({userAuthorize}) {
             <div className="profile__bg-decor--1"></div>
             <div className="profile__bg-decor--2"></div>
             <h2 className="profile__title">Профиль</h2>
-            <FormProfile onUpdateUser={updateUser} userId={userId}/>
+            <FormProfile />
             <ConfigurationPC/>
             <FavoriteProducts/>
           </div>
