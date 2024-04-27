@@ -72,23 +72,38 @@
     width: 21.625rem;
     height: 21.625rem;
 
-    background: url(../../assets/profile/load_foto.svg) no-repeat;
+    background: url(../../assets/profile/bg_user_image.svg) no-repeat;
     background-size: cover;
 
 
   }
   &__foto{
-    max-width:290px;
+    position: relative;
+    left: 2px;
+    max-width:285px;
 
   }
   &__change-foto{
 
     &-button{
+      cursor: pointer;
+      display:block;
+      height:60.2px;
+      margin-top: 140px;
+    }
+    &-icon{
       background-color: #000;
 
-      margin-top: 140px;
       border: 2px solid white;
       padding: 6px 6px 10px 10px;
+    }
+    &-input{
+      overflow: hidden;
+      width:0.1px;
+      height:0.1px;
+      opacity: 0;
+      position: relative;
+      z-index: -1;
     }
   }
   &__save{
