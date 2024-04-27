@@ -1,7 +1,8 @@
 // eslint-disable-next-line
 
 import { useState, useEffect } from "react"
-export default function FormProfile({onUpdateUser}){
+
+export default function FormProfile(){
 
   const [isChange, setIsChange] = useState(false);
   const [user, setUser] = useState({
@@ -12,9 +13,44 @@ export default function FormProfile({onUpdateUser}){
     email: ""
   })
 
+  const [userData, setUserData] = useState({
+    id: 0,
+    name: "",
+    lastname: "",
+    email: "",
+    photo: "",
+    bonuses: 0,
+    phoneNumber: "",
+    assemblies: []
+  })
+
+  // const [changedData, setChangedData] = useState(false);
+
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem('userData');
+  //   if (storedUser) {
+  //     setUserData(storedUser);
+  //     console.log("Полученный пользователь", userData);
+  //   }
+    
+  //   isChangeData()
+  // }, [user]);
+
   useEffect(() => {
-    isChangeData()
-  }, [user]);
+    const storedUser = localStorage.getItem('userData');
+    if (storedUser) {
+      setUserData(storedUser);
+    }
+    setUser({
+      login: userData.name,
+      lastname: userData.lastname,
+      email: userData.email
+    })
+  }, []);
+
+  function getUserValues() {
+    console.log(user);
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,18 +60,14 @@ export default function FormProfile({onUpdateUser}){
     }));
   }
 
-  function isChangeData() {
-    if (user.login !== "" && user.email !== "") {
-      setIsChange(true);
-    }
-    else {
-      setIsChange(false);
-    }
-  }
-
-  function updateUser() {
-    onUpdateUser(user)
-  }
+  // function isChangeData() {
+  //   if (user.login !== "" && user.email !== "") {
+  //     setIsChange(true);
+  //   }
+  //   else {
+  //     setIsChange(false);
+  //   }
+  // }
 
   return <ul className="profile__input-list">
     <li className="profile__input-list__item">
@@ -48,7 +80,7 @@ export default function FormProfile({onUpdateUser}){
       <input type="email" name="email" value={user.email} onChange={handleChange} className="profile__input-list__input email-input" placeholder='Email'/>
     </li>
     { isChange === true && (
-      <button type='submit'  onClick={updateUser} className="form__button">Сохранить изменения</button>
+      <button onClick={getUserValues} className="form__button">Сохранить изменения</button>
     )}
   </ul>
 }

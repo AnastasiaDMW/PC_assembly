@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -50,6 +50,9 @@ export default function App() {
   function handleRegistrationSuccess() {
       setIsRegister(false);
   }
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   function showPassword(ref){
     const tagId = ref.current.getAttribute('for')

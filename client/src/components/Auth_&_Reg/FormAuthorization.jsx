@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-export default function FormAuthorization({onAuth, onClick}){
+export default function FormAuthorization({onChangeEmail, onAuth, onClick}){
   let inputRef = useRef(null);
 
   const navigate = useNavigate();
@@ -38,11 +38,11 @@ export default function FormAuthorization({onAuth, onClick}){
             password: loginData.password,
         });
         info = response.data;
-        
         if (info === "Вход выполнен успешно!") {
           toast.success(info, {
             position: "top-center",
           });
+          handleLogin(loginData.email)
           onAuth(true);
           setLoginData({
             email: '',
@@ -64,6 +64,10 @@ export default function FormAuthorization({onAuth, onClick}){
         onAuth(false);
     }
   }
+
+  const handleLogin = (email) => {
+    localStorage.setItem('userEmail', email);
+  };
 
   return <form action="#" method="post" className="main__form form" onSubmit={handleSubmit}>
       <input type="text" name="email" onChange={handleChange} placeholder="Email" className="form__login form__userdata"/>
