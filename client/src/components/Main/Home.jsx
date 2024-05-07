@@ -19,7 +19,10 @@ export default function Home({}) {
   return (
     <>
       <button onClick={() => {
-        console.log(userEmail);
+        const storedEmail = localStorage.getItem('userEmail');
+        if (storedEmail) {
+          setUserEmail(storedEmail);
+        }
         if (userEmail !== "")
           navigate("/profile");
         else

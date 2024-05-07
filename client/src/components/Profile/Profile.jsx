@@ -18,7 +18,7 @@ import change_foto_button from "../../assets/profile/change_foto_button.svg";
 
 export default function Profile({userAuthorize}) {
 
-    const [userEmail, setUserEmail] = useState('');
+    
     const baseUrl = "http://localhost:9090/api/user/fileSystem/"
     const [userAvatarUrl, setUserAvatarUrl] = useState("");
     const [image, setImage] = useState(null);
@@ -32,25 +32,52 @@ export default function Profile({userAuthorize}) {
       phoneNumber: "",
       assemblies: []
     })
+    const [user, setUser] = useState({
+       login: "",
+       fullname: "",
+       email: "",
+    })
 
-    useEffect(() => {
+    const [userEmail, setUserEmail] = useState(() => {
       const storedEmail = localStorage.getItem('userEmail');
-      if (storedEmail) {
-        setUserEmail(storedEmail);
-      }
-    }, []);
+      return storedEmail ? storedEmail : "";
+    });
     
     useEffect(() => {
-      if (userEmail && userData.email === "") {
-        getUser();
-        setImage(userData.photo)
-      }
+      window.addEventListener('beforeunload', () => {
+        localStorage.setItem('userEmail', userEmail);
+      });
+      getUser();
+      return () => {
+        window.removeEventListener('beforeunload', () => {
+          localStorage.setItem('userEmail', userEmail);
+        });
+      };
     }, [userEmail]);
 
     useEffect(() => {
-      getUser();
-      console.log(userData);
-    }, [image]);
+      window.addEventListener('beforeunload', () => {
+        localStorage.setItem('userData', userData);
+      });
+    
+      return () => {
+        window.removeEventListener('beforeunload', () => {
+          localStorage.setItem('userData', userData);
+        });
+      };
+    }, [userData]);
+    
+    // useEffect(() => {
+    //   if (userEmail && userData.email === "") {
+    //     getUser();
+    //     // setImage(userData.photo)
+    //   }
+    // }, [userEmail]);
+
+    // useEffect(() => {
+    //   getUser();
+    //   console.log(userData);
+    // }, [image]);
 
     const getUser = async (e) => {
       try {
@@ -75,48 +102,60 @@ export default function Profile({userAuthorize}) {
       handleUserData(userData);
     }, [userData]);
 
+    useEffect(() => {
+      if (image){
+        const newUserData = {
+          ...userData,
+          photo: image.name
+        };
+      }
+      // setUserData(newUserData);
+      // console.log(image.name);
+    }, [image]);
+
     const handleImageUpload = async () => {
       console.log(userEmail);
       console.log(userData);
-      console.log(userData.photo);
-      // let info;
+      console.log(baseUrl+userData.photo);
+      let info;
 
-      // if (!image) {
-      //   return;
-      // }
+      if (!image) {
+        return;
+      }
     
-      // const formData = new FormData();
-      // formData.append('image', image);
+      const formData = new FormData();
+      formData.append('image', image);
     
-      // try {
-      //   const responseImage = await axios.post('http://localhost:9090/api/user/fileSystem', formData, {
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data',
-      //     },
-      //   });
-      //   const responseChangeAvatar = await axios.post('http://localhost:9090/api/user/change_avatar', {
-      //     id: userData.id,
-      //     avatar: image.name,
-      //   });
-      //   console.log('Файл успешно загружен:', responseImage.data);
-      //   console.log('Название файла изменено', responseChangeAvatar.data);
+      try {
+        const responseImage = await axios.post('http://localhost:9090/api/user/fileSystem', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        const responseChangeAvatar = await axios.post('http://localhost:9090/api/user/change_avatar', {
+          id: userData.id,
+          avatar: image.name,
+        });
+        console.log('Файл успешно загружен:', responseImage.data);
+        console.log('Название файла изменено', responseChangeAvatar.data);
       //   console.log(image.name);
-      //   setUserData(prevUser => ({
-      //     ...prevUser,
-      //     photo: image.name
-      //   }));
-      //   info = "Аватарка пользователя изменена"
-      //   toast.success(info, {
-      //     position: "top-center",
-      //   });
+        setUserData(prevUser => ({
+          ...prevUser,
+          photo: image.name
+        }));
+        // getUser();
+        info = "Аватарка пользователя изменена"
+        toast.success(info, {
+          position: "top-center",
+        });
       //   getUserAvatar();
-      // } catch (error) {
-      //   info = "Ошибка при загрузке файла"
-      //   toast.error(info, {
-      //     position: "top-center",
-      //   });
-      //   console.error('Ошибка при загрузке файла:', error);
-      // }
+      } catch (error) {
+        info = "Ошибка при загрузке файла"
+        toast.error(info, {
+          position: "top-center",
+        });
+        console.error('Ошибка при загрузке файла:', error);
+      }
     };
 
     return (
@@ -142,8 +181,8 @@ export default function Profile({userAuthorize}) {
               </form>
             </div>
             <div className="profile__foto-block">
-              { !image && <ImageLoader imageUrl={URL.createObjectURL(image)} className="profile__foto"/>}
-              { image && <ImageLoader imageUrl={baseUrl+userData.photo} className="profile__foto"/>}
+              { image && <ImageLoader imageUrl={window.URL.createObjectURL(image)} className="profile__foto"/>}
+              { !image && <ImageLoader imageUrl={baseUrl+userData.photo} className="profile__foto"/>}
             </div>
             <div className='profile__save'>
               <div className="profile__save__">
