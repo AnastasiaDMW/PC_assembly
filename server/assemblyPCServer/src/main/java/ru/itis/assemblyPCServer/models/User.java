@@ -26,6 +26,7 @@ public class User {
     private String name;
     private String lastname;
     private String email;
+    @JsonIgnore
     private String password;
     private String photo;
     private Integer bonuses;

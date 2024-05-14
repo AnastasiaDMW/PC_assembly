@@ -139,6 +139,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String changeUserAvatar(UserAvatar data) throws IOException {
+        User curUser = userRepository
+                .findById(data.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid user id: " + data.getId()));
+
+        curUser.setPhoto(data.getAvatar());
+        userRepository.save(curUser);
+
+        return "Аватарка пользователя изменена";
+    }
+
+    @Override
     public String uploadAvatarToFileSystem(MultipartFile file) throws IOException {
         boolean isNameExist = Boolean.FALSE;
         String filePath;
@@ -192,6 +204,18 @@ public class UserServiceImpl implements UserService {
         );
 
         return userRepository.save(newUser);
+    }
+
+    @Override
+    public User getUserByEmail(String email) throws IOException {
+        List<User> allUsers = userRepository.findAll();
+        User currentUser = null;
+        for (User user : allUsers) {
+            if (user.getEmail().equalsIgnoreCase(email)) {
+                currentUser = user;
+            }
+        }
+        return currentUser;
     }
 
     @Override

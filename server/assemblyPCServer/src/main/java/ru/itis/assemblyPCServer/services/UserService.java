@@ -5,6 +5,7 @@ import ru.itis.assemblyPCServer.dto.UserDto;
 import ru.itis.assemblyPCServer.models.Assembly;
 import ru.itis.assemblyPCServer.models.Form;
 import ru.itis.assemblyPCServer.models.User;
+import ru.itis.assemblyPCServer.models.UserAvatar;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -17,12 +18,15 @@ public interface UserService {
 
     String updateUser(Long id, UserDto user);
 
+    String changeUserAvatar(UserAvatar data) throws IOException;
+
     String uploadAvatarToFileSystem(MultipartFile file) throws IOException;
 
     byte[] downloadAvatarFromFileSystem(String filename) throws IOException;
 
     User saveUserAssembly(User user);
 
+    User getUserByEmail(String email) throws IOException;
     List<User> getUserAssembly();
 
     User getUserAssemblyById(Long id);
