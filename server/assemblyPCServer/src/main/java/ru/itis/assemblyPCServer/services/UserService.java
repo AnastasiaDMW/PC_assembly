@@ -18,12 +18,15 @@ public interface UserService {
 
     String updateUser(Long id, UserDto user);
 
+    String changeUserAvatar(UserAvatar data) throws IOException;
+
     String uploadAvatarToFileSystem(MultipartFile file) throws IOException;
 
     byte[] downloadAvatarFromFileSystem(String filename) throws IOException;
 
     User saveUserAssembly(User user);
 
+    User getUserByEmail(String email) throws IOException;
     List<User> getUserAssembly();
 
     User getUserAssemblyById(Long id);

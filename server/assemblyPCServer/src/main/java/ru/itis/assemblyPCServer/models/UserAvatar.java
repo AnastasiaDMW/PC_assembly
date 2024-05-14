@@ -14,4 +14,3 @@ public class UserAvatar {
     private Long id;
     private String avatar;
 }
-

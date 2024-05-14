@@ -139,6 +139,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String changeUserAvatar(UserAvatar data) throws IOException {
+        User curUser = userRepository
+                .findById(data.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid user id: " + data.getId()));
+
+        curUser.setPhoto(data.getAvatar());
+        userRepository.save(curUser);
+
+        return "Аватарка пользователя изменена";
+    }
+
+    @Override
     public String uploadAvatarToFileSystem(MultipartFile file) throws IOException {
         boolean isNameExist = Boolean.FALSE;
         String filePath;

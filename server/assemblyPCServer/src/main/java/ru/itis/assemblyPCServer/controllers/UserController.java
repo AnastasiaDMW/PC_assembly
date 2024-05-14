@@ -31,6 +31,13 @@ public class UserController {
     public String registration(@RequestBody UserDto user) throws NoSuchAlgorithmException {
         return userService.registration(user);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/change_avatar")
+    public String changeUserAvatar(@RequestBody UserAvatar data) throws IOException {
+        return userService.changeUserAvatar(data);
+    }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PatchMapping("/update/{id}")
     public String updateUserName(@PathVariable Long id, @RequestBody UserDto user) {
@@ -60,6 +67,13 @@ public class UserController {
     public ResponseEntity<?> saveUserAssembly(@RequestBody User user) {
         return new ResponseEntity<>(userService.saveUserAssembly(user), HttpStatus.CREATED);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/user_email")
+    public User getUserByEmail(@RequestParam String email) throws IOException {
+        return userService.getUserByEmail(email);
+    }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/users_assemblies")
     public ResponseEntity<?> getUserAssembly() {
