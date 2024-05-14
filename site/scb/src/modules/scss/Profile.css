@@ -1,0 +1,25 @@
+.profile {
+  margin-top: 6.5rem;
+  display: flex;
+}
+.profile__left-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #9B6195;
+  background: rgba(135, 135, 135, 0.05);
+  backdrop-filter: blur(60px);
+}
+.profile__title {
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: #ffffff;
+  text-shadow: 0 -1px 2px #00848C, 0 -1px 2px #00848C, 0 1px 2px #00848C, 0 1px 2px #00848C, -1px 0 2px #00848C, 1px 0 2px #00848C, -1px 0 2px #00848C, 1px 0 2px #00848C, -1px -1px 2px #00848C, 1px -1px 2px #00848C, -1px 1px 2px #00848C, 1px 1px 2px #00848C, -1px -1px 2px #00848C, 1px -1px 2px #00848C, -1px 1px 2px #00848C, 1px 1px 2px #00848C;
+}
+
+.blue-title {
+  color: #00848C;
+  font-size: 2rem;
+}
+
+/*# sourceMappingURL=Profile.css.map */

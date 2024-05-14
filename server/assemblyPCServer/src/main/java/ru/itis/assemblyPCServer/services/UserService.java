@@ -5,6 +5,7 @@ import ru.itis.assemblyPCServer.dto.UserDto;
 import ru.itis.assemblyPCServer.models.Assembly;
 import ru.itis.assemblyPCServer.models.Form;
 import ru.itis.assemblyPCServer.models.User;
+import ru.itis.assemblyPCServer.models.UserAvatar;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -26,4 +27,8 @@ public interface UserService {
     List<User> getUserAssembly();
 
     User getUserAssemblyById(Long id);
+
+    User getUserByEmail(String email) throws IOException;
+
+    String changeUserAvatar(UserAvatar data) throws IOException;
 }

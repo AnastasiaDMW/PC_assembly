@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.itis.assemblyPCServer.dto.UserDto;
 import ru.itis.assemblyPCServer.models.Form;
 import ru.itis.assemblyPCServer.models.User;
+import ru.itis.assemblyPCServer.models.UserAvatar;
 import ru.itis.assemblyPCServer.services.UserService;
 
 import java.io.IOException;
@@ -34,6 +35,11 @@ public class UserController {
     @PatchMapping("/update/{id}")
     public String updateUserName(@PathVariable Long id, @RequestBody UserDto user) {
         return userService.updateUser(id, user);
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/change_avatar")
+    public String changeUserAvatar(@RequestBody UserAvatar data) throws IOException {
+        return userService.changeUserAvatar(data);
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/fileSystem")
@@ -63,6 +69,11 @@ public class UserController {
     @GetMapping("/user_assembly")
     public User getUserAssemblyById(@RequestParam Long userAssemblyId) {
         return userService.getUserAssemblyById(userAssemblyId);
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/user_email")
+    public User getUserByEmail(@RequestParam String email) throws IOException {
+        return userService.getUserByEmail(email);
     }
 
 }
