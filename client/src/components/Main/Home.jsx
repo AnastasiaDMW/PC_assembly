@@ -19,13 +19,16 @@ export default function Home({}) {
   return (
     <>
       <button onClick={() => {
+        const storedEmail = localStorage.getItem('userEmail');
+        if (storedEmail) {
+          setUserEmail(storedEmail);
+        }
         if (userEmail !== "")
           navigate("/profile");
         else
           navigate("/auth/login");
       }}>Профиль</button><br/><br/>
 
-      <button onClick={() => {}}>Главная страница</button><br/><br/>
       <button onClick={() => {}}>Конфигуратор</button><br/><br/>
 
       <button onClick={() => {
