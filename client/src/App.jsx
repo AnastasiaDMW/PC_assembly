@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import Header from "./components/Header";
 import Authorization from "./components/Auth_&_Reg/Authorization";
 import FormRegistration from "./components/Auth_&_Reg/FormRegistration";
 import FormAuthorization from "./components/Auth_&_Reg/FormAuthorization";
@@ -64,7 +63,7 @@ export default function App() {
 
   return (
       <div className="App">
-        <Header isBeginPage={false}/>
+        {/*<Header isBeginPage={true}/>*/}
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />

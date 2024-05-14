@@ -1,9 +1,9 @@
-
 .header{
   display: flex;
   position: relative;
   width: 1360px;
   justify-content: space-between;
+  align-items: center;
 }
 .navbar{
   &__list{
@@ -11,6 +11,17 @@
     display: flex;
     gap: 4rem;
   }
+  &__text{
+    position: relative;
+    color: white;
+    transition: all 200ms ease-in-out;
+    padding-bottom:3px;
+    font-size: 1.75rem;
+    &:hover{
+      color: rgba(255, 255, 255,0.7);
+    }
+  }
+
 }
 .header__profile{
   border: 2px solid #C32856;

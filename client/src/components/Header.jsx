@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import logo from '../../src/images/svg/logo2.svg'
+import logo from '../../src/assets/logo.svg'
 import avatar from './../../src/images/svg/avatar.svg'
 
 export default function Header({isBeginPage}){

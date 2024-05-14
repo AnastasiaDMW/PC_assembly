@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {useEffect,useState} from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 import '../../modules/scss/favorite_products.scss'
@@ -14,6 +13,7 @@ import FavoriteProducts from './Favorite__Products';
 
 import change_foto_button from "../../assets/profile/change_foto_button.svg";
 import load_foto_icon from "../../assets/profile/load_foto_icon.svg";
+import Header from "../Header";
 
 export default function Profile({userAuthorize}) {
 
@@ -76,6 +76,8 @@ export default function Profile({userAuthorize}) {
     const [image, setImage] = useState(null);
 
     return (
+      <>
+        <Header isBeginPage={false}/>
         <main className="profile">
           <div className="profile__left-side">
             <div className="profile__bg-decor--1"></div>
@@ -88,6 +90,7 @@ export default function Profile({userAuthorize}) {
           <div className="profile__right-side">
             <div className='profile__change-foto'>
               <form action="" className="profile__change-foto-form">
+
                 <label  className='profile__change-foto-button'>
                   <input onChange={(event) => {
                     setImage(event.target.files[0])
@@ -95,12 +98,15 @@ export default function Profile({userAuthorize}) {
                     type='file' className='profile__change-foto-input'/>
                   <img src={change_foto_button} alt='' className='profile__change-foto-icon'/>
                 </label>
+
               </form>
             </div>
+
             <div className="profile__foto-block">
               {image && <img src={URL.createObjectURL(image)} alt="" className="profile__foto"/>}
               {!image && <img src={load_foto_icon} alt="" className="profile__foto"/>}
             </div>
+
             <div className='profile__save'>
               <div className="profile__save__">
                 <button className='profile__save-button' onClick={checkUserData}>Сохранить<br/>изменения</button>
@@ -108,5 +114,6 @@ export default function Profile({userAuthorize}) {
             </div>
           </div>
         </main>
+      </>
     );
 }

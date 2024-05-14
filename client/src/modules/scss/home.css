@@ -1,0 +1,144 @@
+.home {
+  position: relative;
+  width: 1320px;
+  height: 1080px;
+}
+.home__button {
+  position: relative;
+  font-size: 40px;
+  background: linear-gradient(to bottom, #fff 0%, #A479FD 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.home__button:hover:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  width: 100%;
+  box-shadow: 0 0 100px 20px #A479FD;
+}
+.home:before {
+  content: url(../../assets/home/grid.svg);
+  position: absolute;
+  z-index: -2;
+  top: 100px;
+  left: 100px;
+}
+.home:after {
+  content: url(../../images/svg/tv.svg);
+  position: absolute;
+  top: 325px;
+  left: 675px;
+}
+
+.button-1 {
+  position: relative;
+  top: 150px;
+  left: -80px;
+}
+.button-2 {
+  position: relative;
+  top: 850px;
+  left: -250px;
+}
+.button-3 {
+  position: relative;
+  top: 850px;
+  left: 700px;
+}
+
+.blocks-1 {
+  cursor: pointer;
+  content: url(../../assets/home/r-t-block.svg);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: -300px;
+}
+.blocks-1:before {
+  content: "";
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: red;
+}
+
+.blocks-2 {
+  cursor: pointer;
+  content: url(../../assets/home/r-b-block.svg);
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  right: -300px;
+}
+
+.blocks-3 {
+  cursor: pointer;
+  content: url(../../assets/home/l-t-block.svg);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: -300px;
+}
+
+.blocks-4 {
+  cursor: pointer;
+  content: url(../../assets/home/l-b-block.svg);
+  position: absolute;
+  z-index: -1;
+  bottom: 0px;
+  left: -300px;
+}
+
+.blocks-5:before {
+  content: url(../../images/svg/mascot.svg);
+  position: absolute;
+  top: 350px;
+  left: 450px;
+}
+.blocks-5:after {
+  content: url(../../images/svg/logo.svg);
+  position: absolute;
+  top: 380px;
+  left: 700px;
+}
+
+.blocks-6:before {
+  content: url(../../images/svg/small-blocks/1.svg);
+  position: absolute;
+  top: 430px;
+  left: -10px;
+}
+.blocks-6:after {
+  content: url(../../images/svg/small-blocks/2.svg);
+  position: absolute;
+  top: 10px;
+  left: 800px;
+}
+
+.blocks-7:before {
+  content: url(../../images/svg/small-blocks/3.svg);
+  position: absolute;
+  top: 450px;
+  left: 1400px;
+}
+.blocks-7:after {
+  content: url(../../images/svg/small-blocks/4.svg);
+  position: absolute;
+  top: 780px;
+  left: 840px;
+}
+
+.blocks-8:before {
+  content: url(../../images/svg/small-blocks/5.svg);
+  position: absolute;
+  top: 970px;
+  left: 600px;
+}
+.blocks-8:hover:after {
+  background-color: black;
+}
+
+/*# sourceMappingURL=home.css.map */

@@ -1,5 +1,6 @@
 import BuildsCard from "./Builds_Card.jsx";
 import '../../modules/scss/builds.scss'
+import Header from "../Header";
 
 export default function Builds(){
   const CARDS = [
@@ -31,14 +32,17 @@ export default function Builds(){
       ]
     }
   ]
-  return <main className='builds'>
-    <ul className="builds__list">
-      {CARDS.map(card =>(
-        <BuildsCard title={card.title}
-                    description={card.description}
-                    imgPath={card.impPath}
-        />
-      ))}
-    </ul>
-  </main>
+  return <>
+    <Header isBeginPage={false}/>
+    <main className='builds'>
+      <ul className="builds__list">
+        {CARDS.map(card =>(
+          <BuildsCard title={card.title}
+                      description={card.description}
+                      imgPath={card.impPath}
+          />
+        ))}
+      </ul>
+    </main>
+  </>
 }

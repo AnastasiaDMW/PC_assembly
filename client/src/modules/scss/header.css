@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  position: relative;
+  width: 1360px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__list {
+  font-size: 1.125rem;
+  display: flex;
+  gap: 4rem;
+}
+.navbar__text {
+  position: relative;
+  color: white;
+  transition: all 200ms ease-in-out;
+  padding-bottom: 3px;
+  font-size: 1.75rem;
+}
+.navbar__text:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.header__profile {
+  border: 2px solid #C32856;
+  border-radius: 100%;
+  padding: 13.5px 10px;
+  margin: auto 0;
+}
+
+/*# sourceMappingURL=header.css.map */

@@ -1,13 +1,166 @@
 .home{
   position: relative;
-  &:before{
-    content:url('../../assets/home/r-b-block.png');
+  width:1320px;
+  height:1080px;
+
+  &__button{
+    position: relative;
+
+    font-size:40px;
+    background: linear-gradient(to bottom,#fff 0%, #A479FD 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  &__button:hover:before{
+    content:'';
     position: absolute;
+    z-index:-1;
+    top:50%;
+    width:100%;
+    box-shadow: 0 0 100px 20px #A479FD;
+  }
+  &:before{
+    content:url(../../assets/home/grid.svg);
+    position: absolute;
+    z-index:-2;
+    top:100px;
+    left:100px;
+  }
+  &:after{
+    content:url(../../images/svg/tv.svg);
+    position: absolute;
+    top:325px;
+    left:675px;
+  }
+}
+.button{
+  &-1{
+    position: relative;
+    top:150px;
+    left:-80px;
+  }
+  &-2{
+    position: relative;
+    top:850px;
+    left:-250px;
+  }
+  &-3{
+    position: relative;
+    top:850px;
+    left:700px;
+  }
+}
+.blocks-1 {
+  cursor: pointer;
+  content: url(../../assets/home/r-t-block.svg);
+  position: absolute;
+  z-index: -1;
 
-    width:927px;
-    height: 564px;
+  top:0;
+  right:-300px;
+  &:before{
+    content: '';
+    position: relative;
+    width:100px;
+    height: 100px;
+    background: red;
+  }
+}
 
-    top:0;
-    left: -800  px;
+.blocks-2 {
+  cursor: pointer;
+  content: url(../../assets/home/r-b-block.svg);
+  position: absolute;
+  z-index: -1;
+
+  bottom:0;
+  right:-300px;
+}
+.blocks-3 {
+  cursor: pointer;
+  content: url(../../assets/home/l-t-block.svg);
+  position: absolute;
+  z-index: -1;
+
+  top:0;
+  left:-300px;
+
+}
+.blocks-4 {
+  cursor: pointer;
+  content: url(../../assets/home/l-b-block.svg);
+  position: absolute;
+  z-index: -1;
+
+  bottom:-0px;
+  left:-300px;
+}
+
+.blocks-5{
+  &:before{
+    content: url(../../images/svg/mascot.svg);
+    position: absolute;
+    top:350px;
+    left: 450px;
+  }
+  &:after{
+    content: url(../../images/svg/logo.svg);
+    position: absolute;
+    top:380px;
+    left: 700px;
+  }
+}
+.blocks-6{
+  &:before{
+    content: url(../../images/svg/small-blocks/1.svg);
+    position: absolute;
+    top:430px;
+    left:-10px;
+  }
+  &:after{
+    content: url(../../images/svg/small-blocks/2.svg);
+    position: absolute;
+    top:10px;
+    left:800px;
+  }
+}
+.blocks-7{
+  &:before{
+    content: url(../../images/svg/small-blocks/3.svg);
+    position: absolute;
+    top:450px;
+    left:1400px;
+  }
+  &:after{
+    content: url(../../images/svg/small-blocks/4.svg);
+    position: absolute;
+    top:780px;
+    left:840px;
+  }
+}
+.blocks-8{
+  &:before{
+    content:  url(../../images/svg/small-blocks/5.svg);
+    position: absolute;
+    top:970px;
+    left:600px;
+
+  }
+  //&:after{
+  //  content: '';
+  //  position: absolute;
+  //  top:0;
+  //  right:-300px;
+  //  width:668px;
+  //  height:545px;
+  //  clip-path: polygon(6.57% 6.98%, 13.54% 0%, 100% 0%, 100% 97.38%, 93.9% 55.92%, 83.69% 56.42%, 91.07% 50.69%, 83.83% 45.85%, 86.14% 27.98%, 82.03% 32.38%, 71.45% 10.46%, 40.81% 6.91%, 32.69% 27.16%);
+  //
+  //
+  //
+  //  background-color: red;
+  //}
+  &:hover:after{
+    background-color:black;
   }
 }
