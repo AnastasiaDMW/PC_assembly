@@ -10,7 +10,6 @@ import '../../modules/scss/form_profile.scss'
 import '../../modules/scss/сonfigurations_pc.scss'
 import '../../modules/scss/profile.scss'
 
-import FormProfile from './Form_Profile';
 import ConfigurationPC from './Configurations_PC';
 import FavoriteProducts from './Favorite__Products';
 
@@ -20,7 +19,13 @@ export default function Profile({userAuthorize}) {
 
     
     const baseUrl = "http://localhost:9090/api/user/fileSystem/"
-    const [userAvatarUrl, setUserAvatarUrl] = useState("");
+    const [isChange, setIsChange] = useState(false);
+    const [isChangeImage, setIsChangeImage] = useState(false);
+    const [user, setUser] = useState({
+      login: "",
+      lastname: "",
+      email: ""
+    })
     const [image, setImage] = useState(null);
     const [userData, setUserData] = useState({
       id: 0,
@@ -31,11 +36,6 @@ export default function Profile({userAuthorize}) {
       bonuses: 0,
       phoneNumber: "",
       assemblies: []
-    })
-    const [user, setUser] = useState({
-       login: "",
-       fullname: "",
-       email: "",
     })
 
     const [userEmail, setUserEmail] = useState(() => {
@@ -66,18 +66,6 @@ export default function Profile({userAuthorize}) {
         });
       };
     }, [userData]);
-    
-    // useEffect(() => {
-    //   if (userEmail && userData.email === "") {
-    //     getUser();
-    //     // setImage(userData.photo)
-    //   }
-    // }, [userEmail]);
-
-    // useEffect(() => {
-    //   getUser();
-    //   console.log(userData);
-    // }, [image]);
 
     const getUser = async (e) => {
       try {
@@ -100,24 +88,48 @@ export default function Profile({userAuthorize}) {
 
     useEffect(() => {
       handleUserData(userData);
+      if (user) {
+        setUser({
+        login: userData.name,
+        lastname: userData.lastname,
+        email: userData.email
+      })
+      }
+      
     }, [userData]);
 
-    useEffect(() => {
-      if (image){
-        const newUserData = {
-          ...userData,
-          photo: image.name
-        };
-      }
-      // setUserData(newUserData);
-      // console.log(image.name);
-    }, [image]);
-
-    const handleImageUpload = async () => {
-      console.log(userEmail);
-      console.log(userData);
-      console.log(baseUrl+userData.photo);
+    const handleClick = async () => {
+      console.log(image)
+      console.log(userData)
+      console.log(user)
       let info;
+
+      if (userData.name !== user.login || userData.lastname !== user.lastname) {
+        try {
+          const response = await fetch('http://localhost:9090/api/user/update/'+userData.id, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              lastname: user.lastname,
+              name: user.login
+            })
+          });
+          setUserData(prevUser => ({
+            ...prevUser,
+            lastname: user.lastname,
+            name: user.login
+          }));
+          console.log("Данные пользователя изменены");
+          info = "Данные пользователя изменены"
+          toast.success(info, {
+            position: "top-center",
+          });
+        } catch (error) {
+          console.error("ошибка");
+        }
+      }
 
       if (!image) {
         return;
@@ -136,19 +148,17 @@ export default function Profile({userAuthorize}) {
           id: userData.id,
           avatar: image.name,
         });
-        console.log('Файл успешно загружен:', responseImage.data);
-        console.log('Название файла изменено', responseChangeAvatar.data);
-      //   console.log(image.name);
+
         setUserData(prevUser => ({
           ...prevUser,
           photo: image.name
         }));
-        // getUser();
+        setImage(null);
         info = "Аватарка пользователя изменена"
         toast.success(info, {
           position: "top-center",
         });
-      //   getUserAvatar();
+
       } catch (error) {
         info = "Ошибка при загрузке файла"
         toast.error(info, {
@@ -158,13 +168,43 @@ export default function Profile({userAuthorize}) {
       }
     };
 
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+    
+      setUser(prevUser => {
+        const updatedUser = {
+          ...prevUser,
+          [name]: value
+        };
+    
+        const isEqual =
+          updatedUser.email === userData.email &&
+          updatedUser.lastname === userData.lastname &&
+          updatedUser.login === userData.name;
+    
+        setIsChange(!isEqual);
+    
+        return updatedUser;
+      });
+    }
+
     return (
         <main className="profile">
           <div className="profile__left-side">
             <div className="profile__bg-decor--1"></div>
             <div className="profile__bg-decor--2"></div>
             <h2 className="profile__title">Профиль</h2>
-            <FormProfile />
+            <ul className="profile__input-list">
+            <li className="profile__input-list__item">
+              <input type="text" name="login" value={user.login} onChange={handleChange} className="profile__input-list__input name-input" placeholder='Логин'/>
+            </li>
+            <li className="input-list__item">
+              <input type="text" name="lastname" value={user.lastname} onChange={handleChange} className="profile__input-list__input surname-input" placeholder='Полное имя'/>
+            </li>
+            <li className="input-list__item">
+              <input type="email" name="email" value={user.email} onChange={handleChange} className="profile__input-list__input email-input" placeholder='Email' readOnly/>
+            </li>
+          </ul>
             <ConfigurationPC/>
             <FavoriteProducts/>
           </div>
@@ -174,6 +214,7 @@ export default function Profile({userAuthorize}) {
                 <label  className='profile__change-foto-button'>
                   <input onChange={(event) => {
                     setImage(event.target.files[0])
+                    setIsChangeImage(true);
                   }}
                     type='file' className='profile__change-foto-input'/>
                   <img src={change_foto_button} alt='' className='profile__change-foto-icon'/>
@@ -186,7 +227,11 @@ export default function Profile({userAuthorize}) {
             </div>
             <div className='profile__save'>
               <div className="profile__save__">
-                <button className='profile__save-button' onClick={handleImageUpload}>Сохранить<br/>изменения</button>
+                { (isChange || isChangeImage) && (
+                  <button className="profile__save-button" onClick={handleClick}>
+                    Сохранить<br />изменения
+                  </button>
+                )}
               </div>
             </div>
           </div>
