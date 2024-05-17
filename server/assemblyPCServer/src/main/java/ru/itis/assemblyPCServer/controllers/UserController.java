@@ -43,17 +43,14 @@ public class UserController {
     public String updateUserName(@PathVariable Long id, @RequestBody UserDto user) {
         return userService.updateUser(id, user);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/change_avatar")
-    public String changeUserAvatar(@RequestBody UserAvatar data) throws IOException {
-        return userService.changeUserAvatar(data);
-    }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/fileSystem")
     public ResponseEntity<?> uploadImageToFileSystem(@RequestParam("image") MultipartFile file) throws IOException {
         String uploadImage = userService.uploadAvatarToFileSystem(file);
         return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/fileSystem/{filename}")
     public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable String filename) throws IOException {
@@ -62,6 +59,7 @@ public class UserController {
                 .contentType(MediaType.valueOf("image/png"))
                 .body(imageData);
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/add_user_assembly")
     public ResponseEntity<?> saveUserAssembly(@RequestBody User user) {
@@ -84,10 +82,10 @@ public class UserController {
     public User getUserAssemblyById(@RequestParam Long userAssemblyId) {
         return userService.getUserAssemblyById(userAssemblyId);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/user_email")
-    public User getUserByEmail(@RequestParam String email) throws IOException {
-        return userService.getUserByEmail(email);
-    }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/user_favorite")
+    public User getUserFavoriteById(@RequestParam Long userId) {
+        return userService.getUserFavoriteById(userId);
+    }
 }

@@ -37,9 +37,8 @@ public class User {
     @JsonIgnore
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Cart> carts;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> carts = new ArrayList<>();
 
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Collection<Assembly> assemblies = new ArrayList<>();

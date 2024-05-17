@@ -44,7 +44,7 @@ public class Assembly {
     @ManyToMany(mappedBy = "assemblies")
     private Collection<Component> components = new ArrayList<>();
 
-    @OneToMany(mappedBy = "assemblies")
+    @OneToMany(mappedBy = "assemblies", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Cart> carts;
+    private List<Cart> carts = new ArrayList<>();
 }
