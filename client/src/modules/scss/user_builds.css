@@ -73,14 +73,23 @@
   justify-content: space-between;
   gap: 28rem;
 }
+.config__form {
+  border-bottom: 1px solid #878787;
+}
 .config__search {
   width: 532px;
-  border-bottom: 1px solid #878787;
   background: none;
+}
+.config__search--icon {
+  padding-bottom: 0.5rem;
 }
 
 .hidden {
   display: none;
+}
+
+.open-filters {
+  background: none;
 }
 
 /*# sourceMappingURL=user_builds.css.map */
