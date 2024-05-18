@@ -30,12 +30,14 @@ function UserBuildConfigHeader(){
       Сортировать по
       <img src = {filters_icon} className='open-filters__icon' alt='иконка'/>
     </button>
-    <ul className="config__filters filters">
+    <ul className="config__filters filters hidden">
       <li className="filters__values">Возрастанию</li>
       <li className="filters__values">Убыванию</li>
     </ul>
   </div>
 }
+
+
 function UserBuildConfigComponent({title,imgPath,price}){
   return <div className="config__build build">
     <div className="build__card.card">
@@ -110,7 +112,8 @@ export default function UserBuilds() {
       <TopComponent title={'AOIS89364043'} imgPath={pc_2} price={'2323323 Руб.'} description={'самый'} active={false}/>
     </ul>
     <div className="user-builds__config config">
-
+      <UserBuildConfigHeader/>
+      <UserBuildConfigComponent/>
     </div>
   </div>
 }
