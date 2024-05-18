@@ -28,6 +28,8 @@ body{
   display: flex;
 
   font-family: 'Mr.Amazin',sans-serif;
+
+  scroll-behavior: smooth;
 }
 
 @media (prefers-color-scheme: light) {

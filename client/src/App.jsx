@@ -14,6 +14,7 @@ import Builds from "./components/Builds/Builds";
 import "react-toastify/dist/ReactToastify.css";
 import './modules/scss/header.scss';
 import './css/App.css';
+import UserBuilds from "./components/Builds/User_Builds";
 
 
 export default function App() {

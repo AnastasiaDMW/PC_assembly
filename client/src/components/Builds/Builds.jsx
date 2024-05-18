@@ -1,6 +1,7 @@
 import BuildsCard from "./Builds_Card.jsx";
 import '../../modules/scss/builds.scss'
 import Header from "../Header";
+import UserBuilds from "./User_Builds";
 
 export default function Builds(){
   const CARDS = [
@@ -39,10 +40,11 @@ export default function Builds(){
         {CARDS.map(card =>(
           <BuildsCard title={card.title}
                       description={card.description}
-                      imgPath={card.impPath}
+                      imgPath={card.imgPath}
           />
         ))}
       </ul>
+      <UserBuilds/>
     </main>
   </>
 }

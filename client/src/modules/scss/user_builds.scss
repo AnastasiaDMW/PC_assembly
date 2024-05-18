@@ -1,0 +1,97 @@
+.user-builds{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  gap:3.5rem;
+
+  margin-top: 17rem;
+  margin-bottom: 17rem;
+  position:relative;
+
+  &:before{
+    content:url('../../assets/bg_img/open-close__element.svg');
+    position: absolute;
+
+    top:-15rem;
+    left:-300px;
+  }
+  &:after{
+    content:url('../../assets/bg_img/open-close__element.svg');
+    position: absolute;
+
+    rotate:180deg;
+    bottom:-16rem;
+    left:-300px;
+  }
+  &__title{
+    position: relative;
+
+    font-size:1.75rem;
+    color: #ffffff;
+    text-shadow:
+            -0   -1px 2px #00848C,
+            0   -1px 2px #00848C,
+            -0    1px 2px #00848C,
+            0    1px 2px #00848C,
+            -1px -0   2px #00848C,
+            1px -0   2px #00848C,
+            -1px  0   2px #00848C,
+            1px  0   2px #00848C,
+            -1px -1px 2px #00848C,
+            1px -1px 2px #00848C,
+            -1px  1px 2px #00848C,
+            1px  1px 2px #00848C,
+            -1px -1px 2px #00848C,
+            1px -1px 2px #00848C,
+            -1px  1px 2px #00848C,
+            1px  1px 2px #00848C;
+    &:before{
+      content:'';
+      position:absolute;
+
+      width:80%;
+
+      box-shadow: 0 0 60px 3px #00848C;
+    }
+  }
+}
+.top{
+  display:flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap:5rem;
+
+  &__item{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    gap:2.5rem;
+  }
+  &__build{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+
+    background:linear-gradient(133deg, rgba(134, 134, 134, 0.2) 0%, rgba(7, 2, 5, 0.2) 100%);
+
+    padding:2rem 0;
+
+    border:1px solid #878787;
+
+    &--active{
+      border:2.5px solid #00848C;
+    }
+  }
+  &__title{
+    font-size:1rem;
+  }
+  &__price{
+    color:#9B6195;
+    font-size:1.25rem;
+  }
+
+  &__description{
+    color:#00848C;
+    font-size: 1.5rem;
+  }
+}

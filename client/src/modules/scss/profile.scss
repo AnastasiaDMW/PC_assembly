@@ -3,6 +3,7 @@
   z-index:2;
 
   margin-top:6.5rem;
+  justify-content: center;
   display:flex;
   gap: 6rem;
 
@@ -11,7 +12,7 @@
     position: absolute;
     z-index: 0;
     top:-50px;
-    left:870px;
+    left:780px;
     opacity: 0.7;
   }
   &__left-side{
@@ -36,13 +37,13 @@
     grid-template-rows: auto 1fr;
     column-gap:1.25rem;
     row-gap:2.5rem;
-    flex-grow: 1;
+    flex-grow:0;
     justify-content: flex-end;
   }
   &__title{
     margin-top: 2rem;
 
-    font-size:2rem;
+    font-size:1.75rem;
     color: #ffffff;
     text-shadow:
             -0   -1px 2px #00848C,
@@ -69,8 +70,8 @@
     justify-content: center;
     align-items: center;
 
-    width: 21.625rem;
-    height: 21.625rem;
+    width: 19rem;
+    height: 19rem;
 
     background: url(../../assets/profile/bg_user_image.svg) no-repeat;
     background-size: cover;
@@ -80,22 +81,30 @@
   &__foto{
     position: relative;
     left: 2px;
-    max-width:285px;
+    max-width:250px;
 
   }
   &__change-foto{
-
+    position: relative;
+    z-index:1;
     &-button{
+      position: relative;
+      z-index:1;
       cursor: pointer;
       display:block;
       height:60.2px;
-      margin-top: 140px;
+      margin-top: 125px;
+
     }
     &-icon{
       background-color: #000;
 
       border: 2px solid white;
       padding: 6px 6px 10px 10px;
+      transition: all 0.3s ease-in-out;
+      &:hover{
+        background-color: white;
+      }
     }
     &-input{
       overflow: hidden;
@@ -107,7 +116,6 @@
     }
   }
   &__save{
-
 
     justify-self: center;
     grid-column:2/3;
@@ -143,7 +151,7 @@
 }
 .blue-title{
   color: #00848C;
-  font-size:2rem;
+  font-size:1.75rem;
 }
 
 .profile__bg-decor{
@@ -151,19 +159,19 @@
     content: url('../../assets/bg_img/way1.svg');
     position: absolute;
     top: 120px;
-    left: -280px;
+    left: -370px;
   }
   &--1:after{
     content: url('../../assets/bg_img/way.svg');
     position: absolute;
     top: 900px;
-    right: -800px;
+    right: -860px;
   }
   &--2:before{
     content: url('../../assets/bg_img/way2.svg');
     position: absolute;
     top: 950px;
-    right: -800px;
+    right: -860px;
   }
   //&--2:after{
   //  content: url('../../assets/bg_img/squares.svg');
