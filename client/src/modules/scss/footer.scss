@@ -1,0 +1,75 @@
+.footer{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+
+  margin: 0 auto;
+
+  &__title{
+    font-size: 1.25rem;
+  }
+  &__form{
+    display:flex;
+    gap:3.5rem;
+
+    background-image:url('../../assets/footer/frame.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    padding:57px 83px 108px 66px;
+
+  }
+  &__appeal{
+    width:526px;
+    height:309px;
+
+    padding: 1rem;
+
+    font-size:1.125rem;
+
+    background: #090708;
+
+    resize: none;
+  }
+  &__name{
+    width:200px;
+    justify-self:flex-start;
+  }
+  &__email{
+    width:300px;
+    justify-self:flex-start;
+  }
+  &__telephone{
+    width:375px;
+  }
+  &__button{
+    width:300px;
+    align-self: flex-end;
+
+    font: 1.5rem 'Montserrat',sans-serif;
+    color:#9B6195;
+    padding:0.82rem 0.75rem;
+  }
+}
+.right-side{
+  width:373px;
+
+  display:flex;
+  flex-direction: column;
+  gap:2.2rem;
+
+  & input,& button{
+    font-size:1.125rem;
+
+    border: 1px solid #878787;
+    background: #090708;
+  }
+  & input{
+    padding:0.88rem 0.75rem;
+  }
+  & input::placeholder{
+    font-size:1rem;
+    color:rgba(255,255,255,0.75);
+  }
+}

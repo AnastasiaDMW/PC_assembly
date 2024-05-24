@@ -2,6 +2,7 @@ import BuildsCard from "./Builds_Card.jsx";
 import '../../modules/scss/builds.scss'
 import Header from "../Header";
 import UserBuilds from "./User_Builds";
+import Footer from "../Footer/Footer";
 
 export default function Builds(){
   const CARDS = [
@@ -46,5 +47,6 @@ export default function Builds(){
       </ul>
       <UserBuilds/>
     </main>
+    <Footer/>
   </>
 }
